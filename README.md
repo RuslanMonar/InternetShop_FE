@@ -4,4 +4,5 @@
 ### 1) git clone `силка репозиторія`
 ### 2) cd InternetShop_FE
 ### 3) npm install
-### 4) npm start (цю командю запускаєм кожен раз коли починаєм роботу на фронті)
+### 4) npm install react-router-dom --save
+### 5) npm start (цю командю запускаєм кожен раз коли починаєм роботу на фронті)
