@@ -226,3 +226,9 @@ form.form1 {
 .otherProp{
     margin-top: 40px;
 }
+
+.testStyle{
+    width: 1000px;
+    height: 500px;
+    background-color: red;
+}

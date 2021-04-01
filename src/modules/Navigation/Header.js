@@ -1,40 +1,44 @@
-import React , {useContext} from 'react';
+import React, { useContext } from 'react';
 import classes from '../../css/style.module.css';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import Registration from '../Auth/Registration';
 import Login from './../Auth/Login';
-import { logOut , isLoggedInCookie } from '../Auth/Auth';
+import { SignOut } from '../Auth/Auth';
 import AuthContext from './../../contexts/AuthContext';
 
-import axios from 'axios';
-
-import api from '../Auth/ApiAxios';
 
 const Header = () => {
     const [RegisterVisible, setRegisterVisible] = React.useState(false);
     const [LoginVisible, setLoginVisible] = React.useState(false);
-    const {isLoggedIn,setLogged,UserName,setUserName} = useContext(AuthContext);
+    const { isLoggedIn, setLogged, UserName, setUserName } = useContext(AuthContext);
 
     const ToggleRegisterModal = () => {
         setRegisterVisible(!RegisterVisible)
     }
+
     const ToggleLoginModal = () => {
         setLoginVisible(!LoginVisible)
     }
 
-    const Logout = () => {
-        api().get('/sanctum/csrf-cookie').then(response => {
-            api().post("/api/logout").then(result => {
-                if (result.data.status == "Logedout") {
-                    logOut()
-                    setLogged(!isLoggedIn)
-                }
-                else{
-                    console.log("Invalid logout")
-                }
-            })
-        });
+    const ToggleAuthModals = (status) => {
+        if(status == "CloseRegistrationFirst"){
+            ToggleRegisterModal()
+            ToggleLoginModal()
+        }
+        else if(status == 'CloseLoginFirst'){
+            ToggleLoginModal()
+            ToggleRegisterModal()
+        }
+    }
+
+
+    const WhenSignIn = (name, LoginAfterRegistration) => {
+        setLogged(!isLoggedIn)
+        setUserName(name)
+        if (LoginAfterRegistration === false) {
+            ToggleLoginModal()
+        }
     }
 
     return (
@@ -56,7 +60,7 @@ const Header = () => {
                                 <img src="/img/user.png" />
                                 <span>{UserName}</span>
                                 <img src="/img/exit.png" />
-                                <span onClick={Logout} >Вихід</span>
+                                <span onClick={() => SignOut(isLoggedIn, setLogged)} >Вихід</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -69,7 +73,7 @@ const Header = () => {
                                     onClick={ToggleLoginModal}
                                 >Вхід</span>
                             </React.Fragment>
-                            
+
                         )}
                     </div >
                     <div className={classes.basket}>
@@ -97,9 +101,9 @@ const Header = () => {
                 closeMaskOnClick={true}
                 visible={RegisterVisible}
                 onClose={ToggleRegisterModal}
-                className={classes['rodal-close' , 'rodal-dialog']}
+                className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
-                <Registration ToggleLoginModal={ToggleLoginModal} ToggleRegisterModal={ToggleRegisterModal}/>
+                <Registration ToggleAuthModals={ToggleAuthModals} ToggleRegisterModal={ToggleRegisterModal} WhenSignIn={WhenSignIn} />
             </Rodal>
 
             <Rodal width={400}
@@ -108,15 +112,9 @@ const Header = () => {
                 closeMaskOnClick={true}
                 visible={LoginVisible}
                 onClose={ToggleLoginModal}
-                className={classes['rodal-close' , 'rodal-dialog']}
+                className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
-
-                <Login isLoggedIn={isLoggedIn} 
-                setLogged={setLogged} 
-                ToggleLoginModal={ToggleLoginModal} 
-                ToggleRegisterModal={ToggleRegisterModal} 
-                setUserName={setUserName} />
-                
+                <Login ToggleAuthModals={ToggleAuthModals} WhenSignIn={WhenSignIn} />
             </Rodal>
         </div>
     )
