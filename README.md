@@ -1,5 +1,5 @@
-## Запуск
-# Go to OpenServer/domains run terminal and write:
+# Start
+## Go to OpenServer/domains run terminal and write:
 
 ### 1) git clone `link on repository`
 ### 2) cd InternetShop_FE
