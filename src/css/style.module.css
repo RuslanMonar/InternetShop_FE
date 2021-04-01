@@ -302,3 +302,9 @@ form.form1 {
 .phoneNumber>div>span{
     font-size: 17px;
 }
+.privacy>a{
+    color: inherit;
+}
+.privacy>a:hover{
+    color: rgb(126, 71, 71);
+}

@@ -3,7 +3,7 @@ import classes from '../../css/style.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle, faInstagram, faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import {  } from '@fortawesome/react-fontawesome'
-import { faPhone , faSearchLocation , faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import { faPhone , faSearchLocation , faEnvelope , faLock} from "@fortawesome/free-solid-svg-icons";
 
 export const Footer = () => {
     return (
@@ -28,6 +28,12 @@ export const Footer = () => {
                     <div>
                         <span className={classes.listItemTitle}>Почта</span>
                         <span className={classes.listItemTitle}>InternetShop@gmail.com</span>
+                    </div>
+                </div>
+                <div className={classes.phoneNumber}>
+                    <FontAwesomeIcon icon={faLock} size="lg" color="gray" />
+                    <div>
+                        <span className={classes['listItemTitle' , 'privacy']}><a href="#">Політика конфіденційності</a></span>
                     </div>
                 </div>
             </div>
