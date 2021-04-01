@@ -1,13 +1,11 @@
 import Cookies from 'js-cookie'
 import cookie from 'cookie'
 
-export const isLoggedInCookie = (reqCookies = null) => {
-    if (! reqCookies) {
-        return !! Cookies.get('ticket_management_is_user_logged_in')
-    }
-}
+export const isLoggedInCookie = () => {   
+    return !! Cookies.get('ticket_management_is_user_logged_in')          
+};
 
-export const logIn = () => {
+export const logIn = (name) => {
     Cookies.set('ticket_management_is_user_logged_in', true, {expires: 86400, sameSite: 'lax'})
 }
 
