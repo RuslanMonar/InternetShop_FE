@@ -17,8 +17,9 @@ export const DeleteAuthCookie = () => {
     }
 }
 
-export const SignIn = (name, password, WhenSignIn,SetAlertMistake, LoginAfterRegistration = false) => {
-    let data = { name, password }
+export const SignIn = (email, password, WhenSignIn, SetAlertMistake, LoginAfterRegistration = false) => {
+    let data = { email, password }
+    console.log(email)
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/login", data).then(result => {
             if (result.status === 200) {
@@ -28,18 +29,18 @@ export const SignIn = (name, password, WhenSignIn,SetAlertMistake, LoginAfterReg
             }
         }).catch(err => {
             SetAlertMistake(true)
-            console.log('Цей email вже зайнятий');
+            console.log('Невірний логін або пароль');
         })
     });
 }
 
 
-export const SingUp = (name, email, password, ToggleRegisterModal, WhenSignIn , SetAlertMistake) => {
+export const SingUp = (name, email, password, ToggleRegisterModal, WhenSignIn, SetAlertMistake) => {
     let data = { name, email, password }
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/register", data).then(result => {
             if (result.status === 200) {
-                SignIn(name, password, WhenSignIn,SetAlertMistake, true)
+                SignIn(email, password, WhenSignIn, SetAlertMistake, true)
                 SetAlertMistake(false)
                 ToggleRegisterModal();
             }
@@ -57,8 +58,6 @@ export const SignOut = (isLoggedIn, setLogged) => {
                 DeleteAuthCookie()
                 setLogged(!isLoggedIn)
             }
-        }).catch(err => {
-            console.log('Невірний логін або пароль');
         })
     })
 }
