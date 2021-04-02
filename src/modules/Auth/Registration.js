@@ -1,11 +1,12 @@
-import React , {useContext} from 'react';
+import React, { useContext } from 'react';
 import classes from '../../css/style.module.css';
 import { SingUp } from './Auth';
 
-const Registration = ({ToggleAuthModals,ToggleRegisterModal,WhenSignIn}) => {
+const Registration = ({ ToggleAuthModals, ToggleRegisterModal, WhenSignIn , SetAlertMistake, AlertMistake }) => {
     const [name, setName] = React.useState("")
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
+
 
     return (
         <React.Fragment>
@@ -14,7 +15,8 @@ const Registration = ({ToggleAuthModals,ToggleRegisterModal,WhenSignIn}) => {
                 <input className={classes.un} value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Name" />
                 <input className={classes.un} value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
                 <input className={classes.un} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
-                <a className={classes.submit} onClick={() => SingUp(name,email,password,ToggleRegisterModal,WhenSignIn)} align="center">Зареєструватися</a>
+                {AlertMistake ? (<div className={classes.authError} >Цей email вже зайнятий</div>) : (<span></span>)}
+                <a className={classes.submit} onClick={() => SingUp(name, email, password, ToggleRegisterModal, WhenSignIn, SetAlertMistake)} align="center">Зареєструватися</a>
             </form>
             <span className={classes.otherOption}>
                 Або

@@ -4,9 +4,10 @@ import { SignIn } from './Auth';
 
 
 
-const Login = ({ToggleAuthModals , WhenSignIn }) => {
+const Login = ({ToggleAuthModals , WhenSignIn , SetAlertMistake, AlertMistake }) => {
     const [name, setName] = React.useState("")
     const [password, setPassword] = React.useState("")
+
     
     return (
         <React.Fragment>
@@ -14,7 +15,8 @@ const Login = ({ToggleAuthModals , WhenSignIn }) => {
             <form className={classes.form1}>
                 <input className={classes.un} value={name} onChange={(e) => setName(e.target.value)} type="text"  placeholder="Name" />
                 <input className={classes.un} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
-                <a className={classes.submit} onClick={() => SignIn(name,password,WhenSignIn)} align="center">Війти</a>
+                {AlertMistake ? (<div className={classes.authError} >Неправильний логін або пароль</div>) : (<span></span>)}
+                <a className={classes.submit} onClick={() => SignIn(name,password,WhenSignIn,SetAlertMistake)} align="center">Війти</a>
             </form>
             <span className={classes.otherOption}>
                 Або

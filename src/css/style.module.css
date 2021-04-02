@@ -226,9 +226,9 @@ form.form1 {
 .otherProp{
     margin-top: 40px;
 }
-
-.testStyle{
-    width: 1000px;
-    height: 500px;
-    background-color: red;
+.authError{
+    background-color: rgb(245, 111, 111,0.7);
+    width: 76%;
+    margin-bottom: 27px;
+    margin-left: 50px;
 }

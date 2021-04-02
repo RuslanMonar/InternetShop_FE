@@ -11,6 +11,7 @@ import AuthContext from './../../contexts/AuthContext';
 const Header = () => {
     const [RegisterVisible, setRegisterVisible] = React.useState(false);
     const [LoginVisible, setLoginVisible] = React.useState(false);
+    const [AlertMistake, SetAlertMistake] = React.useState(false)
     const { isLoggedIn, setLogged, UserName, setUserName } = useContext(AuthContext);
 
     const ToggleRegisterModal = () => {
@@ -100,10 +101,17 @@ const Header = () => {
                 measure={'px'}
                 closeMaskOnClick={true}
                 visible={RegisterVisible}
-                onClose={ToggleRegisterModal}
+                onClose={() => {ToggleRegisterModal() ; SetAlertMistake(false)}}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
-                <Registration ToggleAuthModals={ToggleAuthModals} ToggleRegisterModal={ToggleRegisterModal} WhenSignIn={WhenSignIn} />
+
+                <Registration 
+                ToggleAuthModals={ToggleAuthModals} 
+                ToggleRegisterModal={ToggleRegisterModal} 
+                WhenSignIn={WhenSignIn} 
+                SetAlertMistake={SetAlertMistake}
+                AlertMistake={AlertMistake} />
+
             </Rodal>
 
             <Rodal width={400}
@@ -111,10 +119,16 @@ const Header = () => {
                 measure={'px'}
                 closeMaskOnClick={true}
                 visible={LoginVisible}
-                onClose={ToggleLoginModal}
+                onClose={() => {ToggleLoginModal() ; SetAlertMistake(false)}}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
-                <Login ToggleAuthModals={ToggleAuthModals} WhenSignIn={WhenSignIn} />
+
+                <Login 
+                ToggleAuthModals={ToggleAuthModals} 
+                WhenSignIn={WhenSignIn} 
+                SetAlertMistake={SetAlertMistake} 
+                AlertMistake={AlertMistake} />
+
             </Rodal>
         </div>
     )
