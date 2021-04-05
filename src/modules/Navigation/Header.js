@@ -12,6 +12,7 @@ const Header = () => {
     const [RegisterVisible, setRegisterVisible] = React.useState(false);
     const [LoginVisible, setLoginVisible] = React.useState(false);
     const [AlertMistake, SetAlertMistake] = React.useState(false)
+    const [responsiveMenu, setMenu] = React.useState(false)
     const { isLoggedIn, setLogged, UserName, setUserName } = useContext(AuthContext);
 
     const ToggleRegisterModal = () => {
@@ -46,7 +47,7 @@ const Header = () => {
         <div className={classes.header}>
             <div className={classes.flex_bar}>
                 <div className={classes.logo}>
-                    <img src="/img/logo4.png" />
+                    <img src="/img/logo6.png" />
                 </div>
                 <div className={classes.search}>
                     <input placeholder="Пошук"></input>
@@ -84,7 +85,8 @@ const Header = () => {
                 </div>
             </div>
             <div className={classes.navigation}>
-                <ul>
+                <div onClick={() => setMenu(!responsiveMenu)} className={classes.hamburger}>☰</div>
+                <ul  className={responsiveMenu===true ?  classes.myListResponsive : classes.menuList}>
                     <li>FASHION</li>
                     <li>ELECTRONIC</li>
                     <li>LEBNSMITTEL</li>
