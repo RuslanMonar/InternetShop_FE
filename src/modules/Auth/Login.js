@@ -1,58 +1,73 @@
 import React from 'react';
-import axios from 'axios';
 import classes from '../../css/style.module.css';
-import api from './ApiAxios';
-import { logIn } from './Auth';
+import { SignIn } from './Auth';
+import GoogleLogin from 'react-google-login'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
-const Login = ({ isLoggedIn, setLogged, ToggleLoginModal,ToggleRegisterModal, setUserName }) => {
+const Login = ({ ToggleAuthModals, WhenSignIn, SetAlertMistake, AlertMistake }) => {
     const [name, setName] = React.useState("")
     const [password, setPassword] = React.useState("")
-    var csrf_token = '{{ echo csrf_token()}}';
 
-    const Login = e => {
-        e.preventDefault();
-        let data = { name, password }
-        //axios.defaults.withCredentials = true;
-        api().get('/sanctum/csrf-cookie').then(response => {
-            api().post("/api/login", data).then(result => {
-                if (result.data.status == "Login succes") {
-                    logIn(result.data.name)
-                    setLogged(!isLoggedIn)
-                    setUserName(result.data.name)
-                    ToggleLoginModal()
-                }
-                else if (result.data.status == "Invalid email or password") {
-                    console.log("Invalid email or password")
-                }
-            })
-        });
+
+    const GoogleSignInResponse = (response) => {
+        if (response.error === undefined) {
+            response = response.profileObj;
+            SignIn(response.email, response.googleId, WhenSignIn, SetAlertMistake)
+        } else {
+            console.log(response.error)
+        }
     }
+
+    const FacebookSignInResponse = (response) => {
+        if (response.error === undefined) {
+            SignIn(response.email, response.userID, WhenSignIn, SetAlertMistake)
+    }
+}
+
 
     return (
         <React.Fragment>
             <span className={classes.sign} align="center">Авторизація </span>
             <form className={classes.form1}>
-                <input className={classes.un} value={name} onChange={(e) => setName(e.target.value)} type="text"  placeholder="Name" />
+                <input className={classes.un} value={name} onChange={(e) => setName(e.target.value)} type="email" placeholder="Email" />
                 <input className={classes.un} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
-                <a className={classes.submit} onClick={Login} align="center">Війти</a>
+                {AlertMistake ? (<div className={classes.authError} >Неправильний логін або пароль</div>) : (<span></span>)}
+                <a className={classes.submit} onClick={() => SignIn(name, password, WhenSignIn, SetAlertMistake)} align="center">Війти</a>
             </form>
             <span className={classes.otherOption}>
                 Або
-                <br/>
-                <br/>
+                <br />
+                <br />
                 Ввійти через аккаунт :
             </span>
             <div className={classes.socialAuth}>
-                <div className={classes.SocialMediaIcon}>
-                    <img src="/img/google.png" />
-                    <span>Google</span>
-                </div>
-                <div className={classes.SocialMediaIcon}>
-                    <img src="/img/facebook.png" />
-                    <span>Facebook</span>
-                </div>
+                <GoogleLogin
+                    clientId="86353896450-e2vq41grdcmdol5njckcm9jteu65fun7.apps.googleusercontent.com"
+                    render={renderProps => (
+                        <div onClick={renderProps.onClick} className={classes.SocialMediaIcon}>
+                            <img src="/img/google.png" />
+                            <span>Google</span>
+                        </div>
+                    )}
+                    buttonText="Sign in with Google"
+                    onSuccess={GoogleSignInResponse}
+                    onFailure={GoogleSignInResponse}
+                    cookiePolicy={'single_host_origin'}
+                />
+                <FacebookLogin
+                    appId="183494546770953"
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    callback={FacebookSignInResponse}
+                    render={renderProps => (
+                        <div onClick={renderProps.onClick} className={classes.SocialMediaIcon}>
+                            <img src="/img/facebook.png" />
+                            <span>Facebook</span>
+                        </div>
+                    )}
+                />
             </div>
-            <div className={classes.otherProp} onClick={() => { ToggleLoginModal(); ToggleRegisterModal();}}>
+            <div className={classes.otherProp} onClick={() => ToggleAuthModals('CloseLoginFirst')}>
                 Ще не зарєстровані? <span className={classes.AuthButton} >Зареєструватися</span>
             </div>
         </React.Fragment>
