@@ -1,13 +1,15 @@
 import React from 'react';
 import Header from './../../modules/Navigation/Header';
-import Form from '../../modules/search_form/SearchForm.js'
+
+import { Footer } from './../../modules/Navigation/Footer';
+
 
 
 const Home = () => {
     return (
         <div>
-       <Header/>
-       
+            <Header />
+            <Footer />
         </div>
     )
 }
