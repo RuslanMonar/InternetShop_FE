@@ -6,6 +6,7 @@ import Registration from '../Auth/Registration';
 import Login from './../Auth/Login';
 import { logOut , isLoggedInCookie } from '../Auth/Auth';
 import AuthContext from './../../contexts/AuthContext';
+import Form from './../search_form/form';
 
 import axios from 'axios';
 
@@ -36,18 +37,17 @@ const Header = () => {
             })
         });
     }
-
+   
     return (
+        
         <div className={classes.header}>
             <div className={classes.flex_bar}>
                 <div className={classes.logo}>
                     <img src="/img/logo4.png" />
                 </div>
                 <div className={classes.search}>
-                    <input placeholder="Пошук"></input>
-                    <div>
-                        <img src="/img/search-512.png" />
-                    </div>
+                <Form/>
+                    
                 </div>
                 <div className={classes.user}>
                     <div className={classes.profile}>
@@ -91,6 +91,7 @@ const Header = () => {
             <div className={classes.extra_info}>
                 <span>Бзкоштовна Доставка - Безкоштовне Повернення</span>
             </div>
+            
             <Rodal width={400}
                 height={550}
                 measure={'px'}
@@ -118,6 +119,7 @@ const Header = () => {
                 setUserName={setUserName} />
                 
             </Rodal>
+            
         </div>
     )
 }
