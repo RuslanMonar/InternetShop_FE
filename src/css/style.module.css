@@ -1,13 +1,15 @@
-.flex_bar {
-    display: flex;
-    width: 100%;
-}
+
 
 ul li {
-    display: inline !important;
+    display: inline;
     margin-right: 20px;
     margin-left: 20px;
     cursor: pointer;
+}
+
+.flex_bar {
+    display: flex;
+    width: 100%;
 }
 
 .header {
@@ -155,7 +157,6 @@ form.form1 {
 }
 
 .un:focus {
-    /* border: 2px solid rgba(0, 0, 0, 0.18) !important; */
     border: 2px solid rgba(201, 126, 176, 0.541) !important;
 }
 
@@ -187,14 +188,16 @@ form.form1 {
     font-weight: bold;
     font-size: 23px;
 }
-.socialAuth{
+
+.socialAuth {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
     margin-top: 5%;
 }
-.SocialMediaIcon{
+
+.SocialMediaIcon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,29 +206,35 @@ form.form1 {
     cursor: pointer;
     transition-duration: 0.4s;
 }
-.SocialMediaIcon:hover{
+
+.SocialMediaIcon:hover {
     background-color: rgb(0, 0, 0);
-    color:white;
+    color: white;
 
 }
-.SocialMediaIcon>img{
+
+.SocialMediaIcon>img {
     width: 30px;
     height: 30px;
     margin-right: 10px;
 }
-.otherOption{
+
+.otherOption {
     margin-top: 10%;
     display: flex;
     justify-content: center;
 }
-.AuthButton{
+
+.AuthButton {
     color: rgb(29, 157, 216);
     text-decoration: underline;
     cursor: pointer;
 }
-.otherProp{
+
+.otherProp {
     margin-top: 40px;
 }
+
 .footer{
     display: flex;
     width: 100%;
@@ -308,3 +317,94 @@ form.form1 {
 .privacy>a:hover{
     color: rgb(126, 71, 71);
 }
+
+.authError {
+    background-color: rgb(245, 111, 111, 0.7);
+    width: 76%;
+    margin-bottom: 27px;
+    margin-left: 50px;
+}
+
+.hamburger {
+    display: none;
+    background: white;
+    font-size: 20px;
+    height: 35px;
+    width: 35px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .search {
+        width: 100%;
+        border: none;
+        margin-bottom: 10px;
+        justify-content: center;
+    }
+
+    .search>input {
+        width: 15%;
+    }
+
+    .search>div {
+        width: 10%;
+    }
+
+    .flex_bar {
+        flex-direction: column;
+    }
+
+    .user {
+        width: 100%;
+        border: none;
+        margin-bottom: 10px;
+    }
+
+    ul li {
+        display: block;
+    }
+
+    .profile {
+        width: 60%;
+    }
+
+    .basket {
+        width: 40%;
+    }
+
+    .hamburger {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+
+    .myListResponsive {
+        display: block;
+    }
+
+    .menuList {
+        display: none;
+    }
+
+    .navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
