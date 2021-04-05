@@ -1,9 +1,13 @@
 import React from 'react';
 import Header from './../../modules/Navigation/Header';
+import { Footer } from './../../modules/Navigation/Footer';
 
 const Home = () => {
     return (
-        <Header />
+        <div>
+            <Header />
+            <Footer />
+        </div>
     )
 }
 

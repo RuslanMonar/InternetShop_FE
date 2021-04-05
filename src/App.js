@@ -1,16 +1,14 @@
 import api from './modules/Auth/ApiAxios';
-import axios from 'axios';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './routes/Home/Home';
-import { logOut, isLoggedInCookie, Username } from './modules/Auth/Auth';
+import {CheckAuthCookie} from './modules/Auth/Auth';
 
 import React from 'react';
 import AuthContext from './contexts/AuthContext';
 import Main from './routes/Products/Main';
 
 function App() {
-
   const Username = () => {
     api().get('/sanctum/csrf-cookie').then(response => {
       api().get("/api/username").then(result => {
@@ -19,7 +17,8 @@ function App() {
       })
     });
   }
-  const [isLoggedIn, setLogged] = React.useState(isLoggedInCookie);
+  
+  const [isLoggedIn, setLogged] = React.useState(CheckAuthCookie);
   const [UserName, setUserName] = React.useState(() => {
     if (isLoggedIn) {
       return Username()
