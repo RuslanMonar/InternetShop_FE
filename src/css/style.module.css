@@ -1,6 +1,7 @@
 
+
 ul li {
-    display: inline ;
+    display: inline;
     margin-right: 20px;
     margin-left: 20px;
     cursor: pointer;
@@ -187,14 +188,16 @@ form.form1 {
     font-weight: bold;
     font-size: 23px;
 }
-.socialAuth{
+
+.socialAuth {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
     margin-top: 5%;
 }
-.SocialMediaIcon{
+
+.SocialMediaIcon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,96 +206,119 @@ form.form1 {
     cursor: pointer;
     transition-duration: 0.4s;
 }
-.SocialMediaIcon:hover{
+
+.SocialMediaIcon:hover {
     background-color: rgb(0, 0, 0);
-    color:white;
+    color: white;
 
 }
-.SocialMediaIcon>img{
+
+.SocialMediaIcon>img {
     width: 30px;
     height: 30px;
     margin-right: 10px;
 }
-.otherOption{
+
+.otherOption {
     margin-top: 10%;
     display: flex;
     justify-content: center;
 }
-.AuthButton{
+
+.AuthButton {
     color: rgb(29, 157, 216);
     text-decoration: underline;
     cursor: pointer;
 }
-.otherProp{
+
+.otherProp {
     margin-top: 40px;
 }
-.authError{
-    background-color: rgb(245, 111, 111,0.7);
+.authError {
+    background-color: rgb(245, 111, 111, 0.7);
     width: 76%;
     margin-bottom: 27px;
     margin-left: 50px;
 }
-.hamburger{
+
+.hamburger {
     display: none;
     background: white;
     font-size: 20px;
     height: 35px;
     width: 35px;
 }
-@media only  screen and (max-width: 1000px) {
-    body{
+
+
+@media only screen and (max-width: 1000px) {
+    body {
         overflow-x: hidden;
     }
-    .header{
+
+    .header {
         flex-direction: column;
         align-items: flex-start;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 10px;
     }
-    .search{
+
+    .search {
         width: 100%;
-        border:none;
+        border: none;
         margin-bottom: 10px;
         justify-content: center;
     }
-    .search>input{
+
+    .search>input {
         width: 15%;
     }
-    .search>div{
+
+    .search>div {
         width: 10%;
     }
+
     .flex_bar {
         flex-direction: column;
     }
-    .user{
+
+    .user {
         width: 100%;
         border: none;
         margin-bottom: 10px;
     }
-    ul li{
+
+    ul li {
         display: block;
     }
-    .profile{
+
+    .profile {
         width: 60%;
     }
-    .basket{
+
+    .basket {
         width: 40%;
     }
-    .hamburger{
+
+    .hamburger {
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
     }
-    .myListResponsive{
+
+
+    .myListResponsive {
         display: block;
     }
-    .menuList{
+
+    .menuList {
         display: none;
     }
-    .navigation{
+
+    .navigation {
         flex-direction: column;
         align-items: center;
     }

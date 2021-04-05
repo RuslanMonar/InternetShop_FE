@@ -6,11 +6,13 @@ import Registration from '../Auth/Registration';
 import Login from './../Auth/Login';
 import { SignOut } from '../Auth/Auth';
 import AuthContext from './../../contexts/AuthContext';
+import SearchForm from '../search_form/SearchForm';
 
 
 const Header = () => {
     const [RegisterVisible, setRegisterVisible] = React.useState(false);
     const [LoginVisible, setLoginVisible] = React.useState(false);
+
     const [AlertMistake, SetAlertMistake] = React.useState(false)
     const [responsiveMenu, setMenu] = React.useState(false)
     const { isLoggedIn, setLogged, UserName, setUserName } = useContext(AuthContext);
@@ -49,12 +51,7 @@ const Header = () => {
                 <div className={classes.logo}>
                     <img src="/img/logo6.png" />
                 </div>
-                <div className={classes.search}>
-                    <input placeholder="Пошук"></input>
-                    <div>
-                        <img src="/img/search-512.png" />
-                    </div>
-                </div>
+                <SearchForm />
                 <div className={classes.user}>
                     <div className={classes.profile}>
                         {isLoggedIn ? (
@@ -98,11 +95,13 @@ const Header = () => {
             <div className={classes.extra_info}>
                 <span>Бзкоштовна Доставка - Безкоштовне Повернення</span>
             </div>
+
             <Rodal width={400}
                 height={550}
                 measure={'px'}
                 closeMaskOnClick={true}
                 visible={RegisterVisible}
+
                 onClose={() => {ToggleRegisterModal() ; SetAlertMistake(false)}}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
@@ -113,7 +112,6 @@ const Header = () => {
                 WhenSignIn={WhenSignIn} 
                 SetAlertMistake={SetAlertMistake}
                 AlertMistake={AlertMistake} />
-
             </Rodal>
 
             <Rodal width={400}
@@ -121,6 +119,7 @@ const Header = () => {
                 measure={'px'}
                 closeMaskOnClick={true}
                 visible={LoginVisible}
+
                 onClose={() => {ToggleLoginModal() ; SetAlertMistake(false)}}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
@@ -132,6 +131,7 @@ const Header = () => {
                 AlertMistake={AlertMistake} />
 
             </Rodal>
+
         </div>
     )
 }
