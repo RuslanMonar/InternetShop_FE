@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { React } from 'react';
-
-import {logOut} from './Auth'
+import {DeleteAuthCookie} from './Auth'
 
 export default function api() {
     const api = axios.create({
@@ -10,7 +8,7 @@ export default function api() {
     })
     api.interceptors.response.use(response => response, error => {
         if (error.response.status === 401) {
-            logOut()
+            DeleteAuthCookie()
             return Promise.reject()
         }
         return Promise.reject(error)
