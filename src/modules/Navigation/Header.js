@@ -9,7 +9,9 @@ import AuthContext from './../../contexts/AuthContext';
 import SearchForm from '../search_form/SearchForm';
 
 
+
 const Header = () => {
+    var Link = require('react-router-dom').Link
     const [RegisterVisible, setRegisterVisible] = React.useState(false);
     const [LoginVisible, setLoginVisible] = React.useState(false);
 
@@ -26,11 +28,11 @@ const Header = () => {
     }
 
     const ToggleAuthModals = (status) => {
-        if(status == "CloseRegistrationFirst"){
+        if (status == "CloseRegistrationFirst") {
             ToggleRegisterModal()
             ToggleLoginModal()
         }
-        else if(status == 'CloseLoginFirst'){
+        else if (status == 'CloseLoginFirst') {
             ToggleLoginModal()
             ToggleRegisterModal()
         }
@@ -49,7 +51,9 @@ const Header = () => {
         <div className={classes.header}>
             <div className={classes.flex_bar}>
                 <div className={classes.logo}>
-                    <img src="/img/logo6.png" />
+                    <Link to="/">
+                        <img src="/img/logo6.png" />
+                    </Link>
                 </div>
                 <SearchForm />
                 <div className={classes.user}>
@@ -83,8 +87,8 @@ const Header = () => {
             </div>
             <div className={classes.navigation}>
                 <div onClick={() => setMenu(!responsiveMenu)} className={classes.hamburger}>☰</div>
-                <ul  className={responsiveMenu===true ?  classes.myListResponsive : classes.menuList}>
-                    <li>FASHION</li>
+                <ul className={responsiveMenu === true ? classes.myListResponsive : classes.menuList}>
+                    <li><Link to="/products">Каталог товарів</Link></li>
                     <li>ELECTRONIC</li>
                     <li>LEBNSMITTEL</li>
                     <li>MASCHINENBAU</li>
@@ -102,16 +106,16 @@ const Header = () => {
                 closeMaskOnClick={true}
                 visible={RegisterVisible}
 
-                onClose={() => {ToggleRegisterModal() ; SetAlertMistake(false)}}
+                onClose={() => { ToggleRegisterModal(); SetAlertMistake(false) }}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
 
-                <Registration 
-                ToggleAuthModals={ToggleAuthModals} 
-                ToggleRegisterModal={ToggleRegisterModal} 
-                WhenSignIn={WhenSignIn} 
-                SetAlertMistake={SetAlertMistake}
-                AlertMistake={AlertMistake} />
+                <Registration
+                    ToggleAuthModals={ToggleAuthModals}
+                    ToggleRegisterModal={ToggleRegisterModal}
+                    WhenSignIn={WhenSignIn}
+                    SetAlertMistake={SetAlertMistake}
+                    AlertMistake={AlertMistake} />
             </Rodal>
 
             <Rodal width={400}
@@ -120,15 +124,15 @@ const Header = () => {
                 closeMaskOnClick={true}
                 visible={LoginVisible}
 
-                onClose={() => {ToggleLoginModal() ; SetAlertMistake(false)}}
+                onClose={() => { ToggleLoginModal(); SetAlertMistake(false) }}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
 
-                <Login 
-                ToggleAuthModals={ToggleAuthModals} 
-                WhenSignIn={WhenSignIn} 
-                SetAlertMistake={SetAlertMistake} 
-                AlertMistake={AlertMistake} />
+                <Login
+                    ToggleAuthModals={ToggleAuthModals}
+                    WhenSignIn={WhenSignIn}
+                    SetAlertMistake={SetAlertMistake}
+                    AlertMistake={AlertMistake} />
 
             </Rodal>
 
