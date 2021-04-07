@@ -1,4 +1,7 @@
-
+body a {
+    text-decoration: none;
+    color:black;
+}
 
 ul li {
     display: inline;
@@ -239,7 +242,6 @@ form.form1 {
     display: flex;
     width: 100%;
     height: auto;
-    position: absolute;
 	left: 0;
 	bottom: 0;
     justify-content: center;
