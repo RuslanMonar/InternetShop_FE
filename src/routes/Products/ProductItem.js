@@ -6,7 +6,7 @@ import { faShoppingCart , faComment } from "@fortawesome/free-solid-svg-icons";
 import StarRatings from 'react-star-ratings';
 
 
-const ProductItem = ({product_name,price,rating,front_image}) => {
+const ProductItem = ({product_name,price,rating,comments,front_image}) => {
     price = price.toLocaleString()
     return (
         <div className={'productItem'}>
@@ -28,7 +28,7 @@ const ProductItem = ({product_name,price,rating,front_image}) => {
                             <span>{rating}</span>
                             <div className={'comments'}>
                                 <FontAwesomeIcon icon={faComment} size="xs" color="black"  />
-                                <span>20</span>
+                                <span>{comments}</span>
                             </div>
                         </div>
                         <div className={'buyBox'}>
