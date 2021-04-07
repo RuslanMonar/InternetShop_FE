@@ -2,8 +2,8 @@ import React from 'react';
 import '../../css/productsGrid.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { } from '@fortawesome/free-brands-svg-icons'
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-
+import { faShoppingCart , faComment } from "@fortawesome/free-solid-svg-icons";
+import StarRatings from 'react-star-ratings';
 
 
 const Grid = () => {
@@ -19,6 +19,22 @@ const Grid = () => {
                     </div>
                     <div className={'productItemInfo'}>
                         <span>Aple MacBook Pro  A23</span>
+                        <div className={'starRating'}>
+                            <StarRatings 
+                                rating={4.3}
+                                starRatedColor="orange"
+                                numberOfStars={5}
+                                starDimension="15px"
+                                starSpacing="3px"
+                                starEmptyColor="gray"
+                                name='rating'
+                            />
+                            <span>4.3</span>
+                            <div className={'comments'}>
+                                <FontAwesomeIcon icon={faComment} size="xs" color="black"  />
+                                <span>20</span>
+                            </div>
+                        </div>
                         <div className={'buyBox'}>
                             <span>51 550 ₴</span>
                             <div className={'shoppingCartIcon'}>
@@ -33,6 +49,22 @@ const Grid = () => {
                     </div>
                     <div className={'productItemInfo'}>
                         <span>Aple MacBook Pro  A23</span>
+                        <div className={'starRating'}>
+                            <StarRatings 
+                                rating={4.3}
+                                starRatedColor="orange"
+                                numberOfStars={5}
+                                starDimension="15px"
+                                starSpacing="5px"
+                                starEmptyColor="gray"
+                                name='rating'
+                            />
+                            <span>4.3</span>
+                            <div className={'comments'}>
+                                <FontAwesomeIcon icon={faComment} size="xs" color="black"  />
+                                <span>20</span>
+                            </div>
+                        </div>
                         <div className={'buyBox'}>
                             <span>51 550 ₴</span>
                             <div className={'shoppingCartIcon'}>
@@ -47,6 +79,22 @@ const Grid = () => {
                     </div>
                     <div className={'productItemInfo'}>
                         <span>Aple MacBook Pro  A23</span>
+                        <div className={'starRating'}>
+                            <StarRatings 
+                                rating={4.3}
+                                starRatedColor="orange"
+                                numberOfStars={5}
+                                starDimension="15px"
+                                starSpacing="5px"
+                                starEmptyColor="gray"
+                                name='rating'
+                            />
+                            <span>4.3</span>
+                            <div className={'comments'}>
+                                <FontAwesomeIcon icon={faComment} size="xs" color="black"  />
+                                <span>20</span>
+                            </div>
+                        </div>
                         <div className={'buyBox'}>
                             <span>51 550 ₴</span>
                             <div className={'shoppingCartIcon'}>
@@ -61,6 +109,22 @@ const Grid = () => {
                     </div>
                     <div className={'productItemInfo'}>
                         <span>Aple MacBook Pro  A23</span>
+                        <div className={'starRating'}>
+                            <StarRatings 
+                                rating={4.3}
+                                starRatedColor="orange"
+                                numberOfStars={5}
+                                starDimension="15px"
+                                starSpacing="5px"
+                                starEmptyColor="gray"
+                                name='rating'
+                            />
+                            <span>4.3</span>
+                            <div className={'comments'}>
+                                <FontAwesomeIcon icon={faComment} size="xs" color="black"  />
+                                <span>20</span>
+                            </div>
+                        </div>
                         <div className={'buyBox'}>
                             <span>51 550 ₴</span>
                             <div className={'shoppingCartIcon'}>
@@ -75,6 +139,22 @@ const Grid = () => {
                     </div>
                     <div className={'productItemInfo'}>
                         <span>Aple MacBook Pro  A23</span>
+                        <div className={'starRating'}>
+                            <StarRatings 
+                                rating={4.3}
+                                starRatedColor="orange"
+                                numberOfStars={5}
+                                starDimension="15px"
+                                starSpacing="5px"
+                                starEmptyColor="gray"
+                                name='rating'
+                            />
+                            <span>4.3</span>
+                            <div className={'comments'}>
+                                <FontAwesomeIcon icon={faComment} size="xs" color="black"  />
+                                <span>20</span>
+                            </div>
+                        </div>
                         <div className={'buyBox'}>
                             <span>51 550 ₴</span>
                             <div className={'shoppingCartIcon'}>
@@ -89,6 +169,22 @@ const Grid = () => {
                     </div>
                     <div className={'productItemInfo'}>
                         <span>Aple MacBook Pro  A23</span>
+                        <div className={'starRating'}>
+                            <StarRatings 
+                                rating={4.3}
+                                starRatedColor="orange"
+                                numberOfStars={5}
+                                starDimension="15px"
+                                starSpacing="5px"
+                                starEmptyColor="gray"
+                                name='rating'
+                            />
+                            <span>4.3</span>
+                            <div className={'comments'}>
+                                <FontAwesomeIcon icon={faComment} size="xs" color="black"  />
+                                <span>20</span>
+                            </div>
+                        </div>
                         <div className={'buyBox'}>
                             <span>51 550 ₴</span>
                             <div className={'shoppingCartIcon'}>

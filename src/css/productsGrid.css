@@ -28,9 +28,11 @@
     display: flex;
     flex-direction: column;
     width: 21%;
-    height: 320px;
+    /* width: 17%; */
+    height: 340px;
     background-color: rgb(255, 255, 255);
     margin-left: 3%;
+    /* margin-left: 2%; */
     margin-bottom: 50px;
 }
 
@@ -49,24 +51,27 @@
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    height: 60%;
-    /* padding: 20px; */
+    /* height: 60%; */
+    padding-top: 10px;
     padding-left: 20px;
     padding-right: 25px;
     border-top: 0.5px solid #cfcfcf;
 }
-.buyBox{
+
+.buyBox {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: -10px;
+    margin-bottom: 10px;
 }
-.buyBox>span{
+
+.buyBox>span {
     color: #090909;
     font-size: 20px;
     font-weight: bold;
 }
-.shoppingCartIcon{
+
+.shoppingCartIcon {
     width: 35px;
     height: 35px;
     justify-content: center;
@@ -76,4 +81,24 @@
     background: red;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.starRating {
+    display: flex;
+    align-items: center;
+}
+.starRating>span {
+    margin-left: 10px;
+    font-size: 13px;
+    color: gray;
+}
+.comments{
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.comments>span{
+    margin-left: 5px;
+    font-size: 13px;
 }
