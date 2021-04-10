@@ -55,9 +55,11 @@ const Grid = () => {
             if (verge === 'lowerPrice') {
                 if (lowerPrice.min !== null) {
                     setLowerPrice({ min: Number(lowerPrice.min + value) });
+                    if (Number(lowerPrice.min + value) < higherPrice.max) {
                     setFilterPrice(filterPrice => ({
                         ...filterPrice, min: Number(lowerPrice.min + value)
                     }));
+                }
                 }
                 else {
                     setLowerPrice({ min: value });
@@ -93,7 +95,7 @@ const Grid = () => {
                     newValue = Math.floor(lowerPrice.min / 10);
                 }
                 setLowerPrice({ min: newValue });
-                if (newValue >= minPrice && newValue <= maxPrice && newValue !== null) {
+                if (newValue >= minPrice && newValue <= maxPrice && newValue !== null && newValue < higherPrice.max) {
                     setFilterPrice(filterPrice => ({
                         ...filterPrice, min: Number(newValue)
                     }));
@@ -138,14 +140,22 @@ const Grid = () => {
                 </div>
 
                 <div className={'input-range-field'}>
-                    <input onChange={value => ChangePriceInput(value.nativeEvent.data, 'lowerPrice')} type="text" value={lowerPrice.min} />
-                    <input onChange={value => ChangePriceInput(value.nativeEvent.data, 'higherPrice')} type="text" value={higherPrice.max} />
+
+                    <input onChange={value => ChangePriceInput(value.nativeEvent.data, 'lowerPrice')}
+                        type="text"
+                        className={'filterPriceInput ' + (lowerPrice.min > higherPrice.max ? 'filterPriceInputError' : 'filterPriceInputOk')}
+                        value={lowerPrice.min} />
+                        
+
+                    <input onChange={value => ChangePriceInput(value.nativeEvent.data, 'higherPrice')}
+                        type="text"
+                        className={'filterPriceInput ' + (higherPrice.max < lowerPrice.min ? 'filterPriceInputError' : 'filterPriceInputOk')}
+                        value={higherPrice.max} />
                 </div>
                 <InputRange
                     maxValue={maxPrice}
                     minValue={minPrice}
                     value={filterPrice}
-
                     onChange={value => { setFilterPrice(value); setLowerPrice(value); setHigherPrice(value) }}
                 />
             </div>
