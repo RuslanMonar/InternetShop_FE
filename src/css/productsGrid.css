@@ -1,7 +1,6 @@
 .GridContainer {
     width: 100%;
     height: 1000px;
-    background-color: red;
     display: flex;
 }
 
@@ -11,8 +10,10 @@
     background-color: white;
     border: 1px solid black;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    flex-direction: column;
     flex-wrap: wrap;
+
 }
 
 .productsContainer {
@@ -106,4 +107,107 @@
 .comments>span{
     margin-left: 5px;
     font-size: 13px;
+}
+.manufacturer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    padding-left: 10%;
+    border-bottom: 0.5px solid rgb(214, 214, 214);
+    padding-bottom: 20px;
+}
+.manufacturer>span{
+    margin-top: 5px ;
+    cursor: pointer;
+}
+.CharacteristicTitle{
+    font-size: 17px;
+    font-weight: bold;
+    width: max-content;
+    cursor: text;
+}
+.priceRange{
+    height: fit-content;
+    width: 70%;
+    margin-left: 10%;
+    background: grey; 
+}
+.input-range{
+    height: fit-content;
+    width: 70%;
+    margin-left: 10%;
+    background: grey;
+    margin-top:30px;
+}
+.input-range-field{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.input-range-field>input{
+    width: 30%;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.input-range__label--value{
+    display: none;
+}
+.input-range__track{
+    background: #dddddd;
+}
+.input-range__track--active{
+    background-color: black;
+}
+.input-range__slider{
+    background-color: black;
+}
+.input-range__slider{
+    border: none;
+    width: 8px;
+    height: 18px;
+    border-radius: unset;
+}
+.input-range__label{
+    top:15px;
+}
+@media only screen and (max-width: 1400px) {
+    .productItem{
+        width: 30%;
+    }
+    .filterForDbContainer{
+        width: 25%;
+    }
+    .productsContainer{
+        width: 75%;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .productItem{
+        width: 45%;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .filterForDbContainer{
+        display: none;
+    }
+    .productsContainer{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 535px) {
+    .productItem{
+        width: 100%;
+    }
+    .filterForDbContainer{
+        display: none;
+    }
+    .productsContainer{
+        width: 100%;
+    }
 }

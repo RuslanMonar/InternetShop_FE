@@ -3,9 +3,9 @@ import classes from '../../css/style.module.css';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import Registration from '../Auth/Registration';
-import Login from './../Auth/Login';
+import Login from '../Auth/Login';
 import { SignOut } from '../Auth/Auth';
-import AuthContext from './../../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import SearchForm from '../search_form/SearchForm';
 
 
