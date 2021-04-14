@@ -4,6 +4,7 @@ import '../../css/productsGrid.css'
 import ProductItem from './ProductItem';
 import api from '../../modules/Auth/ApiAxios'
 import InputRange from 'react-input-range';
+import PhonesFilter from './PhonesFilter';
 
 
 const Grid = () => {
@@ -11,7 +12,7 @@ const Grid = () => {
     React.useEffect(() => {
         GetProductsList();
     }, [])
-    
+
     const maxPriceDefault = 100000000000;
     const [ProductsList, setProductList] = React.useState();
     const [minPrice, setMinPrice] = React.useState(100);
@@ -19,7 +20,7 @@ const Grid = () => {
     const [filterPrice, setFilterPrice] = React.useState({ min: minPrice, max: maxPrice });
     const [lowerPrice, setLowerPrice] = React.useState({ min: minPrice });
     const [higherPrice, setHigherPrice] = React.useState({ max: maxPrice });
-    const [filterParams, setFIlterParams] = React.useState({})
+    const [filterParams, setFIlterParams] = React.useState({ manufacturer: [] })
 
 
 
@@ -152,27 +153,55 @@ const Grid = () => {
         setLowerPrice({ min: price.lowerPrice })
     }
 
+
+
     const insertParam = (key, value) => {
+        let delteArray = false;
         if (!filterParams[key]) {
             filterParams[key] = [];
         }
+        if (Array.isArray(value) && value.length == 2 && value !== null) {
+            if (filterParams[key][0] !== 'Interval') {
+                filterParams[key].unshift('Interval');
+            }
+            if (Array.isArray(value) && value.length == 2 && value !== null) {
+                filterParams[key].forEach(element => {
+                    if (element.length === value.length && element.every(function (val, index) { return val === value[index] })) {
+                        let elementIndex = filterParams[key].indexOf(element);
+                        filterParams[key].splice(elementIndex, 1);
+                        delteArray = true;
+                    }
+                });
+            }
+           
+        }
+        if (key === 'lower_price' || key === 'higher_price') {
+            filterParams[key].pop()
+        }
         if (filterParams[key].includes(value)) {
             filterParams[key] = filterParams[key].filter(e => e !== value);
+
         }
         else {
-            filterParams[key].push(value)
+            if (!delteArray) {
+                filterParams[key].push(value)
+            }
         }
     }
 
-    const filterByParams = () => {
-        let data = { filterParams }
+    const filterByParams = (type) => {
+        insertParam('lower_price', lowerPrice.min)
+        insertParam('higher_price', higherPrice.max)
+        let data = { filterParams, type }
         console.log(data);
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/filter", data).then(result => {
+                //console.log(result.data.products)
                 setProductList(result.data.products)
             })
         });
     }
+
 
     return (
         <div className={'GridContainer'}>
@@ -193,8 +222,7 @@ const Grid = () => {
                                 type="text"
                                 className={'filterPriceInput ' + (lowerPrice.min > higherPrice.max ? 'filterPriceInputError' : 'filterPriceInputOk')}
                                 value={lowerPrice.min} />
-
-
+                                
                             <input onChange={value => ChangePriceInput(value.nativeEvent.data, 'higherPrice')}
                                 type="text"
                                 className={'filterPriceInput ' + (higherPrice.max < lowerPrice.min ? 'filterPriceInputError' : 'filterPriceInputOk')}
@@ -210,31 +238,9 @@ const Grid = () => {
 
                 )
                 }
-
                 <br />
                 <br />
-                <div className={'FilterCheckbox'}>
-                    <span>Screen TYPE</span>
-                    <label> <input onChange={() => insertParam('screen_type', 'OLED')} type="checkbox" />OLED</label>
-                    <label> <input onChange={() => insertParam('screen_type', 'AMOLED')} type="checkbox" />AMOLED</label>
-                    <label> <input onChange={() => insertParam('screen_type', 'IPS')} type="checkbox" />IPS</label>
-                    <br />
-                    <br />
-                    <span>RAM Memory</span>
-                    <label> <input onChange={() => insertParam('ram', 4)} type="checkbox" />4</label>
-                    <label> <input onChange={() => insertParam('ram', 6)} type="checkbox" />6</label>
-                    <label> <input onChange={() => insertParam('ram', 8)} type="checkbox" />8</label>
-                    <br />
-                    <br />
-                    <span>Виробник</span>
-                    <label> <input onChange={() => insertParam('inner_memory', 256)} type="checkbox" />256</label>
-                    <label> <input onChange={() => insertParam('inner_memory', 64)} type="checkbox" />64</label>
-                    <label> <input onChange={() => insertParam('inner_memory', 32)} type="checkbox" />32</label>
-                    <br />
-                    <br />
-
-                    <span onClick={() => filterByParams()}>Прийняти зміни</span>
-                </div>
+                <PhonesFilter insertParam={insertParam} filterByParams={filterByParams} />
             </div>
             <div className={'productsContainer'}>
                 {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}
