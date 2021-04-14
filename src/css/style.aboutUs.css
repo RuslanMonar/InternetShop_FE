@@ -1,0 +1,148 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+}
+ #titleAboutUs{
+     color: rgb(250, 250, 250);
+     font-size: 70px;
+     font-weight: bold;
+     text-align: center;
+     
+     opacity: 1;
+     -webkit-text-stroke: 2.1px #000000
+ } 
+.AboutUsOurTeam{
+    
+    height: 400px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    opacity: 0.8;
+    background-image: url(https://mizky.com/sites/mizky.com/files/styles/front/public/pa/321.jpg?itok=Q0EJAn98);
+}
+
+ 
+ #container{
+     margin-left: 280px;
+     margin-right: 280px;
+     margin-top: 50px;
+     
+ }
+ #textAboutUs{
+     font-size: 16px;
+     letter-spacing: normal;
+     line-height: 24px;
+     
+ }
+ 
+ .textAboutUs_container{
+     display: flex;
+     margin-top: 50px;
+ }
+ 
+ .textAboutUsImg{
+     margin-left: 100px;
+ }
+ .textAboutUsImg img{
+    width: 300px;
+    height: 220px;
+ }
+ .textAboutUsTraining{
+     margin-top: 50px;
+     display: flex;
+     justify-content: space-between;
+ }
+ .textAboutTrainingPhoto img{
+     width: 300px;
+     height: 220px;
+     margin-right: 60px;
+ }
+ .AboutUsGallery{
+     margin-top: 50px;
+     margin-bottom: 100px;
+     display: flex;
+     justify-content: space-between;
+ }
+ .AboutUsEmploye{
+    
+     border-radius: 5%;
+     width: 300px;
+     height: 300px;
+     padding: 20px;
+     
+ }
+ .AboutUsEmploye img{
+     width: 260px;
+     height: 200px;
+ }
+ .AboutUsEmployeText{
+    font-size: 25px;
+    text-align: center;
+    font-weight: normal;
+    font-style: normal;
+    word-break: break-all;
+    width: 260px;
+ }
+ .AboutUsEmployeText p{
+    font-size: 15px;
+    color: grey;
+ }
+ @media only screen and (max-width: 1000px){
+    #textAboutUs{
+        font-size: 10px;
+        
+        line-height: 12px;
+        
+    }
+    .textAboutUsImg{
+        margin-left: 30px;
+    }
+    .textAboutUsImg img{
+       width: 200px;
+       height: 120px;
+    }
+    #container{
+        margin-left: 180px;
+        margin-right: 180px;
+        
+        
+    }
+    .textAboutTrainingPhoto img{
+        width: 200px;
+        height: 150px;
+        margin-right: 10px;
+        margin-top: 0px;
+    }
+    .AboutUsGallery{
+        margin-top: 50px;
+        margin-bottom: 50px;
+        display: block;
+        
+    }
+    .AboutUsEmploye{
+        margin-left: 30%;
+        width: 200px;
+        height: 160px;
+        margin-bottom: 100px;
+        text-align: center;
+        
+    
+    }
+    .AboutUsEmploye img{
+        width: 160px;
+        height: 120px;
+        text-align: center;
+    }
+    .AboutUsEmployeText{
+        font-size: 15px;
+        text-align: center;
+        font-weight: normal;
+        font-style: normal;
+        word-break: break-all;
+        width:100%;
+     }
+ }
