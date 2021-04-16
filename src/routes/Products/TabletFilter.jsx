@@ -22,6 +22,9 @@ const PhonesFilter = ({ insertParam, filterByParams }) => {
                 <label> <input onChange={() => insertParam('screen_type', 'AMOLED')} type="checkbox" />AMOLED</label>
                 <label> <input onChange={() => insertParam('screen_type', 'Super AMOLED')} type="checkbox" />Super AMOLED</label>
                 <label> <input onChange={() => insertParam('screen_type', 'IPS')} type="checkbox" />IPS</label>
+                <label> <input onChange={() => insertParam('screen_type', 'Retina')} type="checkbox" />Retina</label>
+                <label> <input onChange={() => insertParam('screen_type', 'TFT')} type="checkbox" />TFT</label>
+                <label> <input onChange={() => insertParam('screen_type', 'LCD')} type="checkbox" />LCD</label>
             </div>
 
             <div className={'CurrentCheckbox'}>
@@ -130,7 +133,7 @@ const PhonesFilter = ({ insertParam, filterByParams }) => {
             </div>
 
 
-            <button className={'FilterSubmit'} onClick={() => filterByParams('Phone')}>Прийняти зміни</button>
+            <button className={'FilterSubmit'} onClick={() => filterByParams('Tablet')}>Прийняти зміни</button>
 
         </div>
     )

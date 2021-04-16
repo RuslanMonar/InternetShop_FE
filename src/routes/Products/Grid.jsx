@@ -4,7 +4,8 @@ import '../../css/productsGrid.css'
 import ProductItem from './ProductItem';
 import api from '../../modules/Auth/ApiAxios'
 import InputRange from 'react-input-range';
-import PhonesFilter from './PhonesFilter';
+import PhonesFilter  from './PhonesFilter';
+import LaptopFilter  from './LaptopFilter';
 
 
 const Grid = () => {
@@ -21,6 +22,9 @@ const Grid = () => {
     const [lowerPrice, setLowerPrice] = React.useState({ min: minPrice });
     const [higherPrice, setHigherPrice] = React.useState({ max: maxPrice });
     const [filterParams, setFIlterParams] = React.useState({ manufacturer: [] })
+    const [Phone, setPhone] = React.useState(false)
+    const [Laptop, setLaptop] = React.useState(false)
+    const [Tablet, setTablet] = React.useState(false)
 
 
 
@@ -155,16 +159,50 @@ const Grid = () => {
 
 
 
-    const insertParam = (key, value) => {
+    // const insertParam = (key, value) => {
+    //     let delteArray = false;
+    //     if (!filterParams[key]) {
+    //         filterParams[key] = [];
+    //     }
+    //     if (Array.isArray(value) && value.length == 2 && value !== null) {
+    //         if (filterParams[key][0] !== 'Interval') {
+    //             filterParams[key].unshift('Interval');
+    //         }
+    //         if (Array.isArray(value) && value.length == 2 && value !== null) {
+    //             filterParams[key].forEach(element => {
+    //                 if (element.length === value.length && element.every(function (val, index) { return val === value[index] })) {
+    //                     let elementIndex = filterParams[key].indexOf(element);
+    //                     filterParams[key].splice(elementIndex, 1);
+    //                     delteArray = true;
+    //                 }
+    //             });
+    //         }
+
+    //     }
+    //     if (key === 'lower_price' || key === 'higher_price') {
+    //         filterParams[key].pop()
+    //     }
+    //     if (filterParams[key].includes(value)) {
+    //         filterParams[key] = filterParams[key].filter(e => e !== value);
+
+    //     }
+    //     else {
+    //         if (!delteArray) {
+    //             filterParams[key].push(value)
+    //         }
+    //     }
+    // }
+
+    const insertParam = (key, value , searchType=null) => {
         let delteArray = false;
         if (!filterParams[key]) {
             filterParams[key] = [];
         }
-        if (Array.isArray(value) && value.length == 2 && value !== null) {
-            if (filterParams[key][0] !== 'Interval') {
-                filterParams[key].unshift('Interval');
+        if (value && searchType) {
+            if (filterParams[key][0] !== searchType) {
+                filterParams[key].unshift(searchType);
             }
-            if (Array.isArray(value) && value.length == 2 && value !== null) {
+            if (value && Array.isArray(value)) {
                 filterParams[key].forEach(element => {
                     if (element.length === value.length && element.every(function (val, index) { return val === value[index] })) {
                         let elementIndex = filterParams[key].indexOf(element);
@@ -173,7 +211,7 @@ const Grid = () => {
                     }
                 });
             }
-           
+
         }
         if (key === 'lower_price' || key === 'higher_price') {
             filterParams[key].pop()
@@ -187,16 +225,17 @@ const Grid = () => {
                 filterParams[key].push(value)
             }
         }
+        console.log(filterParams)
     }
 
     const filterByParams = (type) => {
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
-        console.log(data);
+        console.log(data)
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/filter", data).then(result => {
-                //console.log(result.data.products)
+                console.log(result.data.products)
                 setProductList(result.data.products)
             })
         });
@@ -209,9 +248,9 @@ const Grid = () => {
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
                     <span onClick={() => GetProductsList()}>Всі</span>
-                    <span onClick={() => FindByCateogry('Phone')}>Телефони</span>
-                    <span onClick={() => FindByCateogry('Tablet')}>Планшети</span>
-                    <span onClick={() => FindByCateogry('Laptop')}>Ноутбуки</span>
+                    <span onClick={() => {FindByCateogry('Phone'); setPhone(true);setLaptop(false);setTablet(false);setFIlterParams({})}}>Телефони</span>
+                    <span onClick={() => {FindByCateogry('Tablet');setPhone(false);setLaptop(false);setTablet(true);setFIlterParams({})}}>Планшети</span>
+                    <span onClick={() => {FindByCateogry('Laptop'); setPhone(false);setLaptop(true);setTablet(false);setFIlterParams({})}}>Ноутбуки</span>
                 </div>
                 {maxPrice === maxPriceDefault ? (
                     <div></div>
@@ -222,7 +261,7 @@ const Grid = () => {
                                 type="text"
                                 className={'filterPriceInput ' + (lowerPrice.min > higherPrice.max ? 'filterPriceInputError' : 'filterPriceInputOk')}
                                 value={lowerPrice.min} />
-                                
+
                             <input onChange={value => ChangePriceInput(value.nativeEvent.data, 'higherPrice')}
                                 type="text"
                                 className={'filterPriceInput ' + (higherPrice.max < lowerPrice.min ? 'filterPriceInputError' : 'filterPriceInputOk')}
@@ -240,7 +279,12 @@ const Grid = () => {
                 }
                 <br />
                 <br />
-                <PhonesFilter insertParam={insertParam} filterByParams={filterByParams} />
+                {Phone ? (
+                    <PhonesFilter insertParam={insertParam} filterByParams={filterByParams} />
+                ) : (null)}
+                {Laptop ? (
+                    <LaptopFilter insertParam={insertParam} filterByParams={filterByParams} />
+                ) : (null)}
             </div>
             <div className={'productsContainer'}>
                 {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}
