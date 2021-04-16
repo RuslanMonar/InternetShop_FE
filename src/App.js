@@ -7,6 +7,7 @@ import {CheckAuthCookie} from './modules/Auth/Auth';
 import React from 'react';
 import AuthContext from './contexts/AuthContext';
 import Main from './routes/Products/Main';
+import About from './routes/AboutUs/AboutUs';
 
 function App() {
   const Username = () => {
@@ -31,6 +32,7 @@ function App() {
       <AuthContext.Provider value={{ UserName, setUserName, isLoggedIn, setLogged }}>
         <Route path="/" exact component={Home} />
         <Route path="/products" exact component={Main} />
+        <Route path="/about" exact component={About} />
       </AuthContext.Provider>
     </Switch>
   );

@@ -89,7 +89,7 @@ const Header = () => {
                 <div onClick={() => setMenu(!responsiveMenu)} className={classes.hamburger}>☰</div>
                 <ul className={responsiveMenu === true ? classes.myListResponsive : classes.menuList}>
                     <li><Link to="/products">Каталог товарів</Link></li>
-                    <li>ELECTRONIC</li>
+                    <li><Link to="/about">Про нас</Link></li>
                     <li>LEBNSMITTEL</li>
                     <li>MASCHINENBAU</li>
                     <li>LANDINGPAGE</li>

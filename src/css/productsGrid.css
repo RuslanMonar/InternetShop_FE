@@ -57,10 +57,11 @@
     padding-right: 25px;
     border-top: 0.5px solid #cfcfcf;
 }
+
 .productItemInfo>span {
-       overflow: hidden;
-       text-overflow: ellipsis;
-       white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
 }
 
 .buyBox {
@@ -92,22 +93,26 @@
     display: flex;
     align-items: center;
 }
+
 .starRating>span {
     margin-left: 10px;
     font-size: 13px;
     color: gray;
 }
-.comments{
+
+.comments {
     margin-left: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.comments>span{
+
+.comments>span {
     margin-left: 5px;
     font-size: 13px;
 }
-.manufacturer{
+
+.manufacturer {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -116,82 +121,100 @@
     border-bottom: 0.5px solid rgb(214, 214, 214);
     padding-bottom: 20px;
 }
-.manufacturer>span{
-    margin-top: 5px ;
+
+.manufacturer>span {
+    margin-top: 5px;
     cursor: pointer;
 }
-.CharacteristicTitle{
+
+.CharacteristicTitle {
     font-size: 17px;
     font-weight: bold;
     width: max-content;
     cursor: text;
 }
-.priceRange{
-    height: fit-content;
-    width: 70%;
-    margin-left: 10%;
-    background: grey; 
-}
-.input-range{
+
+.priceRange {
     height: fit-content;
     width: 70%;
     margin-left: 10%;
     background: grey;
-    margin-top:30px;
 }
-.input-range-field{
+
+.input-range {
+    height: fit-content;
+    width: 70%;
+    margin-left: 10%;
+    background: grey;
+    margin-top: 30px;
+}
+
+.input-range-field {
     display: flex;
     justify-content: space-around;
     width: 90%;
     margin-top: 20px;
 }
-.filterPriceInput{
+
+.filterPriceInput {
     width: 30%;
     text-align: center;
     padding: 7px;
 }
-.filterPriceInputError{
+
+.filterPriceInputError {
     border: 1px solid red;
     outline-color: red;
     outline: 1px;
     background: rgba(255, 0, 0, 0.1);
 }
-.filterPriceInputOk{
+
+.filterPriceInputOk {
     border: 1px solid black;
 }
+
 input[type='number'] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
-.input-range__label--value{
+
+.input-range__label--value {
     display: none;
 }
-.input-range__track{
+
+.input-range__track {
     background: #dddddd;
 }
-.input-range__track--active{
+
+.input-range__track--active {
     background-color: black;
 }
-.input-range__slider{
+
+.input-range__slider {
     background-color: black;
 }
-.input-range__slider{
+
+.input-range__slider {
     border: none;
     width: 8px;
     height: 18px;
     border-radius: unset;
 }
-.input-range__label{
-    top:15px;
+
+.input-range__label {
+    top: 15px;
 }
-.FilterCheckbox{
+
+.FilterCheckbox {
     display: flex;
     flex-direction: column;
 }
-.CurrentCheckbox{
+
+.CurrentCheckbox {
     display: flex;
     flex-direction: column;
     padding-left: 10%;
@@ -199,17 +222,20 @@ input::-webkit-inner-spin-button {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-.CurrentCheckbox>span{
+
+.CurrentCheckbox>span {
     font-weight: 600;
     margin-bottom: 5px;
 }
-.CurrentCheckbox>label{
+
+.CurrentCheckbox>label {
     padding-left: 3%;
 }
-.FilterSubmit{
+
+.FilterSubmit {
     padding-left: 10%;
     background: rgba(0, 0, 0);
-    color:white;
+    color: white;
     width: fit-content;
     padding: 10px;
     margin-left: 10%;
@@ -221,6 +247,7 @@ input::-webkit-inner-spin-button {
     overflow: hidden;
     outline: none;
 }
+
 .FilterSubmit:after {
     content: "";
     background: rgb(214, 214, 214);
@@ -228,50 +255,95 @@ input::-webkit-inner-spin-button {
     position: absolute;
     padding-top: 300%;
     padding-left: 350%;
-    margin-left: -20px!important;
+    margin-left: -20px !important;
     margin-top: -120%;
     opacity: 0;
     transition: all 0.8s
-  }
-  
-  .FilterSubmit:active:after {
+}
+
+.FilterSubmit:active:after {
     padding: 0;
     margin: 0;
     opacity: 0.7;
     transition: 0s
-  }
+}
+
+.FilterIcon {
+    margin: 20px;
+    margin-top: 30px;
+    margin-left: 40px;
+    display: none;
+}
+
+
+
 @media only screen and (max-width: 1400px) {
-    .productItem{
+    .productItem {
         width: 30%;
     }
-    .filterForDbContainer{
+
+    .filterForDbContainer {
         width: 25%;
     }
-    .productsContainer{
+
+    .productsContainer {
         width: 75%;
     }
 }
+
 @media only screen and (max-width: 800px) {
-    .productItem{
+    .productItem {
         width: 45%;
     }
 }
+
 @media only screen and (max-width: 1100px) {
-    .filterForDbContainer{
-        display: none;
+    .GridContainer {
+        flex-direction: column;
+
     }
-    .productsContainer{
+
+    .filterForDbContainer {
+        flex-direction: column;
         width: 100%;
+    }
+
+    .FilterCheckbox {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+    }
+
+    .CurrentCheckbox>label {
+        padding-left: 0;
+    }
+
+    .FilterSubmit {
+        width: -webkit-fill-available;
+    }
+
+    .productsContainer {
+        width: 100%;
+    }
+
+    .FilterIcon {
+        display: block;
+    }
+    .ResponsiveCheckbox {
+        display: flex;
+    }
+    
+    .NotResponsiveCheckbox {
+        display: none;
     }
 }
+
 @media only screen and (max-width: 535px) {
-    .productItem{
+    .productItem {
         width: 100%;
     }
-    .filterForDbContainer{
-        display: none;
-    }
-    .productsContainer{
+
+    .productsContainer {
         width: 100%;
     }
 }

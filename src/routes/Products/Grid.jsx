@@ -4,9 +4,12 @@ import '../../css/productsGrid.css'
 import ProductItem from './ProductItem';
 import api from '../../modules/Auth/ApiAxios'
 import InputRange from 'react-input-range';
-import PhonesFilter  from './PhonesFilter';
-import LaptopFilter  from './LaptopFilter';
-
+import PhonesFilter from './PhonesFilter';
+import LaptopFilter from './LaptopFilter';
+import TabletFilter from './TabletFilter';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {  } from '@fortawesome/free-brands-svg-icons'
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 
 const Grid = () => {
 
@@ -25,6 +28,7 @@ const Grid = () => {
     const [Phone, setPhone] = React.useState(false)
     const [Laptop, setLaptop] = React.useState(false)
     const [Tablet, setTablet] = React.useState(false)
+    const [filterIcon , setFIlterIcon] = React.useState(false)
 
 
 
@@ -193,7 +197,7 @@ const Grid = () => {
     //     }
     // }
 
-    const insertParam = (key, value , searchType=null) => {
+    const insertParam = (key, value, searchType = null) => {
         let delteArray = false;
         if (!filterParams[key]) {
             filterParams[key] = [];
@@ -246,9 +250,9 @@ const Grid = () => {
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
                     <span onClick={() => GetProductsList()}>Всі</span>
-                    <span onClick={() => {FindByCateogry('Phone'); setPhone(true);setLaptop(false);setTablet(false);setFIlterParams({})}}>Телефони</span>
-                    <span onClick={() => {FindByCateogry('Tablet');setPhone(false);setLaptop(false);setTablet(true);setFIlterParams({})}}>Планшети</span>
-                    <span onClick={() => {FindByCateogry('Laptop'); setPhone(false);setLaptop(true);setTablet(false);setFIlterParams({})}}>Ноутбуки</span>
+                    <span onClick={() => { FindByCateogry('Phone'); setPhone(true); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Телефони</span>
+                    <span onClick={() => { FindByCateogry('Tablet'); setPhone(false); setLaptop(false); setTablet(true); setFIlterParams({}) }}>Планшети</span>
+                    <span onClick={() => { FindByCateogry('Laptop'); setPhone(false); setLaptop(true); setTablet(false); setFIlterParams({}) }}>Ноутбуки</span>
                 </div>
                 {maxPrice === maxPriceDefault ? (
                     <div></div>
@@ -277,12 +281,12 @@ const Grid = () => {
                 }
                 <br />
                 <br />
-                {Phone ? (
-                    <PhonesFilter insertParam={insertParam} filterByParams={filterByParams} />
-                ) : (null)}
-                {Laptop ? (
-                    <LaptopFilter insertParam={insertParam} filterByParams={filterByParams} />
-                ) : (null)}
+                <FontAwesomeIcon onClick={() => setFIlterIcon(!filterIcon)} className={'FilterIcon'} icon={faSlidersH} size="lg" color="black" />
+                <div className={`${filterIcon ? 'ResponsiveCheckbox' : 'NotResponsiveCheckbox'}`}>
+                {Phone ?  ( <PhonesFilter  insertParam={insertParam} filterByParams={filterByParams} /> ) : (null)}
+                {Laptop ? (<LaptopFilter insertParam={insertParam} filterByParams={filterByParams} /> ) : (null)}
+                {Tablet ? (<TabletFilter insertParam={insertParam} filterByParams={filterByParams} /> ) : (null)}
+                </div>
             </div>
             <div className={'productsContainer'}>
                 {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}
