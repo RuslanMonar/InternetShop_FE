@@ -8,8 +8,10 @@ import PhonesFilter from './PhonesFilter';
 import LaptopFilter from './LaptopFilter';
 import TabletFilter from './TabletFilter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  } from '@fortawesome/free-brands-svg-icons'
+import { } from '@fortawesome/free-brands-svg-icons'
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 const Grid = () => {
 
@@ -28,7 +30,8 @@ const Grid = () => {
     const [Phone, setPhone] = React.useState(false)
     const [Laptop, setLaptop] = React.useState(false)
     const [Tablet, setTablet] = React.useState(false)
-    const [filterIcon , setFIlterIcon] = React.useState(false)
+    const [filterIcon, setFIlterIcon] = React.useState(false)
+    const [ActiveLoader, setActiveLoader] = React.useState(false)
 
 
 
@@ -134,18 +137,22 @@ const Grid = () => {
     }
 
     const GetProductsList = () => {
+        setActiveLoader(true);
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/products").then(result => {
                 setProductsParams(result)
+                setActiveLoader(false);
             })
         });
     }
 
     const FindByCateogry = (categoryName) => {
+        setActiveLoader(true);
         let data = { name: categoryName }
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/category", data).then(result => {
                 setProductsParams(result)
+                setActiveLoader(false);
             })
         });
     }
@@ -160,8 +167,6 @@ const Grid = () => {
         setHigherPrice({ max: price.higherPrice })
         setLowerPrice({ min: price.lowerPrice })
     }
-
-
 
     // const insertParam = (key, value) => {
     //     let delteArray = false;
@@ -233,12 +238,14 @@ const Grid = () => {
     }
 
     const filterByParams = (type) => {
+        setActiveLoader(true);
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/filter", data).then(result => {
                 setProductsParams(result)
+                setActiveLoader(false);
             })
         });
     }
@@ -246,6 +253,7 @@ const Grid = () => {
 
     return (
         <div className={'GridContainer'}>
+            {ActiveLoader ? (<Loader className={'loaderSpiner'} type="Oval" color="black" height={200} width={200} />) : (null)}
             <div className={'filterForDbContainer'}>
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
@@ -283,9 +291,9 @@ const Grid = () => {
                 <br />
                 <FontAwesomeIcon onClick={() => setFIlterIcon(!filterIcon)} className={'FilterIcon'} icon={faSlidersH} size="lg" color="black" />
                 <div className={`${filterIcon ? 'ResponsiveCheckbox' : 'NotResponsiveCheckbox'}`}>
-                {Phone ?  ( <PhonesFilter  insertParam={insertParam} filterByParams={filterByParams} /> ) : (null)}
-                {Laptop ? (<LaptopFilter insertParam={insertParam} filterByParams={filterByParams} /> ) : (null)}
-                {Tablet ? (<TabletFilter insertParam={insertParam} filterByParams={filterByParams} /> ) : (null)}
+                    {Phone ? (<PhonesFilter insertParam={insertParam} filterByParams={filterByParams} />) : (null)}
+                    {Laptop ? (<LaptopFilter insertParam={insertParam} filterByParams={filterByParams} />) : (null)}
+                    {Tablet ? (<TabletFilter insertParam={insertParam} filterByParams={filterByParams} />) : (null)}
                 </div>
             </div>
             <div className={'productsContainer'}>
