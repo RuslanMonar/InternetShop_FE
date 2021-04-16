@@ -9,6 +9,7 @@ const SearchForm =  () => {
 
     const SearchFunc = () => {
         let data = {"name":searchData}
+        api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/search", data).then(result => {
                 if (result.status === 200){
                     console.log(result.data.search)
@@ -16,6 +17,7 @@ const SearchForm =  () => {
             }).catch(err => {
                 console.log('Помилка');
             })
+        });
     }
     
 

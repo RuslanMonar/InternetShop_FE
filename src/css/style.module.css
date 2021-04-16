@@ -409,4 +409,8 @@ form.form1 {
         align-items: center;
     }
 }
-
+@media only screen and (max-width: 675px) {
+    .extra_info{
+        width: 95%;
+    }
+}
