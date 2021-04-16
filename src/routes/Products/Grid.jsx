@@ -232,11 +232,9 @@ const Grid = () => {
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
-        console.log(data)
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/filter", data).then(result => {
-                console.log(result.data.products)
-                setProductList(result.data.products)
+                setProductsParams(result)
             })
         });
     }
