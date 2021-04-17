@@ -234,7 +234,6 @@ const Grid = () => {
                 filterParams[key].push(value)
             }
         }
-        console.log(filterParams)
     }
 
     const filterByParams = (type) => {
@@ -257,7 +256,7 @@ const Grid = () => {
             <div className={'filterForDbContainer'}>
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
-                    <span onClick={() => GetProductsList()}>Всі</span>
+                    <span onClick={() => {GetProductsList();setPhone(false); setLaptop(false); setTablet(false); setFIlterParams({})}}>Всі</span>
                     <span onClick={() => { FindByCateogry('Phone'); setPhone(true); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Телефони</span>
                     <span onClick={() => { FindByCateogry('Tablet'); setPhone(false); setLaptop(false); setTablet(true); setFIlterParams({}) }}>Планшети</span>
                     <span onClick={() => { FindByCateogry('Laptop'); setPhone(false); setLaptop(true); setTablet(false); setFIlterParams({}) }}>Ноутбуки</span>
@@ -285,8 +284,7 @@ const Grid = () => {
                         />
                     </div>
 
-                )
-                }
+                )}
                 <br />
                 <br />
                 <FontAwesomeIcon onClick={() => setFIlterIcon(!filterIcon)} className={'FilterIcon'} icon={faSlidersH} size="lg" color="black" />
