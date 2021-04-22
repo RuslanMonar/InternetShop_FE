@@ -3,9 +3,9 @@ import classes from '../../css/style.module.css';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import Registration from '../Auth/Registration';
-import Login from './../Auth/Login';
+import Login from '../Auth/Login';
 import { SignOut } from '../Auth/Auth';
-import AuthContext from './../../contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import SearchForm from '../search_form/SearchForm';
 
 
@@ -89,7 +89,7 @@ const Header = () => {
                 <div onClick={() => setMenu(!responsiveMenu)} className={classes.hamburger}>☰</div>
                 <ul className={responsiveMenu === true ? classes.myListResponsive : classes.menuList}>
                     <li><Link to="/products">Каталог товарів</Link></li>
-                    <li>ELECTRONIC</li>
+                    <li><Link to="/about">Про нас</Link></li>
                     <li>LEBNSMITTEL</li>
                     <li>MASCHINENBAU</li>
                     <li>LANDINGPAGE</li>

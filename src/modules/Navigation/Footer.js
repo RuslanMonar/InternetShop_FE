@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle, faInstagram, faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { faPhone , faSearchLocation , faEnvelope , faLock} from "@fortawesome/free-solid-svg-icons";
 
-export const Footer = () => {
+ const Footer = () => {
     return (
         <div className={classes.footer}>
             <div className={classes.contactInfo}>

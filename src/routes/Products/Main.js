@@ -1,6 +1,6 @@
 import React from 'react';
 import { Footer } from '../../modules/Navigation/Footer';
-import Header from './../../modules/Navigation/Header';
+import Header from '../../modules/Navigation/Header';
 import Grid from './Grid';
 
 const Main = () => {
@@ -8,7 +8,7 @@ const Main = () => {
         <div> 
            <Header />
             <Grid />
-            <Footer /> 
+            {/* <Footer />  */}
         </div>
     )
 }
