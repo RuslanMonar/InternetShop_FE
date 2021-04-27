@@ -3,23 +3,26 @@ import classes from '../../css/style.module.css';
 import { SingUp } from './Auth';
 import GoogleSignUp from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import AuthContext from './../../contexts/AuthContext';
 
-const Registration = ({ ToggleAuthModals, ToggleRegisterModal, WhenSignIn, SetAlertMistake, AlertMistake }) => {
+const Registration = () => {
     const [name, setName] = React.useState("")
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
 
+    const {ToggleAuthModals , AlertMistake} = React.useContext(AuthContext);
+
     const GoogleSignUpResponse = (response) => {
         if (response.error === undefined) {
             response = response.profileObj;
-            SingUp(response.name, response.email, response.googleId, ToggleRegisterModal, WhenSignIn, SetAlertMistake)
+            SingUp(response.name, response.email, response.googleId)
         } else {
             console.log(response.error)
         }
     }
 
     const FacebookSignUpResponse = (response) => {
-        SingUp(response.name, response.email, response.userID, ToggleRegisterModal, WhenSignIn, SetAlertMistake)
+        SingUp(response.name, response.email, response.userID)
     }
 
 
@@ -31,7 +34,7 @@ const Registration = ({ ToggleAuthModals, ToggleRegisterModal, WhenSignIn, SetAl
                 <input className={classes.un} value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
                 <input className={classes.un} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                 {AlertMistake ? (<div className={classes.authError} >Цей email вже зайнятий</div>) : (<span></span>)}
-                <a className={classes.submit} onClick={() => SingUp(name, email, password, ToggleRegisterModal, WhenSignIn, SetAlertMistake)} align="center">Зареєструватися</a>
+                <a className={classes.submit} onClick={() => SingUp(name, email, password)} align="center">Зареєструватися</a>
             </form>
             <span className={classes.otherOption}>
                 Або

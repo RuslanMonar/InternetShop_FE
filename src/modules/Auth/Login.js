@@ -3,16 +3,19 @@ import classes from '../../css/style.module.css';
 import { SignIn } from './Auth';
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import AuthContext from './../../contexts/AuthContext';
 
-const Login = ({ ToggleAuthModals, WhenSignIn, SetAlertMistake, AlertMistake }) => {
+const Login = () => {
     const [name, setName] = React.useState("")
     const [password, setPassword] = React.useState("")
+
+    const {AlertMistake,ToggleAuthModals} = React.useContext(AuthContext);
 
 
     const GoogleSignInResponse = (response) => {
         if (response.error === undefined) {
             response = response.profileObj;
-            SignIn(response.email, response.googleId, WhenSignIn, SetAlertMistake)
+            SignIn(response.email, response.googleId)
         } else {
             console.log(response.error)
         }
@@ -20,11 +23,10 @@ const Login = ({ ToggleAuthModals, WhenSignIn, SetAlertMistake, AlertMistake }) 
 
     const FacebookSignInResponse = (response) => {
         if (response.error === undefined) {
-            SignIn(response.email, response.userID, WhenSignIn, SetAlertMistake)
+            SignIn(response.email, response.userID)
+        }
     }
-}
-
-
+    
     return (
         <React.Fragment>
             <span className={classes.sign} align="center">Авторизація </span>
@@ -32,7 +34,7 @@ const Login = ({ ToggleAuthModals, WhenSignIn, SetAlertMistake, AlertMistake }) 
                 <input className={classes.un} value={name} onChange={(e) => setName(e.target.value)} type="email" placeholder="Email" />
                 <input className={classes.un} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                 {AlertMistake ? (<div className={classes.authError} >Неправильний логін або пароль</div>) : (<span></span>)}
-                <a className={classes.submit} onClick={() => SignIn(name, password, WhenSignIn, SetAlertMistake)} align="center">Війти</a>
+                <a className={classes.submit} onClick={() => SignIn(name, password)} align="center">Війти</a>
             </form>
             <span className={classes.otherOption}>
                 Або

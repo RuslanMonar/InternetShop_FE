@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie'
 import api from './ApiAxios';
+import AuthContext from './../../contexts/AuthContext';
+import  React  from 'react';
 
 export const CheckAuthCookie = () => {
     return !!Cookies.get('ticket_management_is_user_logged_in')
@@ -17,9 +19,9 @@ export const DeleteAuthCookie = () => {
     }
 }
 
-export const SignIn = (email, password, WhenSignIn, SetAlertMistake, LoginAfterRegistration = false) => {
+export const SignIn = (email, password, LoginAfterRegistration = false) => {
+    const { SetAlertMistake, WhenSignIn } = React.useContext(AuthContext);
     let data = { email, password }
-    console.log(email)
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/login", data).then(result => {
             if (result.status === 200) {
@@ -35,12 +37,13 @@ export const SignIn = (email, password, WhenSignIn, SetAlertMistake, LoginAfterR
 }
 
 
-export const SingUp = (name, email, password, ToggleRegisterModal, WhenSignIn, SetAlertMistake) => {
+export const SingUp = (name, email, password) => {
+    const { ToggleRegisterModal, SetAlertMistake } = React.useContext(AuthContext);
     let data = { name, email, password }
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/register", data).then(result => {
             if (result.status === 200) {
-                SignIn(email, password, WhenSignIn, SetAlertMistake, true)
+                SignIn(email, password, true)
                 SetAlertMistake(false)
                 ToggleRegisterModal();
             }
