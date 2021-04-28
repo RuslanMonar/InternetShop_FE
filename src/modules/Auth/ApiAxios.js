@@ -8,7 +8,7 @@ export default function api() {
         baseURL: 'http://localhost:8000',
         withCredentials: true,
     })
-    api.interceptors.response.use(response => console.log(response.data), error => {
+    api.interceptors.response.use(response => response, error => {
         if(error.message == 'Network Error' && !error.status){ 
             Promise.reject()
             history.push('/network_error')
