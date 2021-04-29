@@ -12,6 +12,7 @@ import { } from '@fortawesome/free-brands-svg-icons'
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import  Rodal  from 'rodal';
 
 const Grid = () => {
 
@@ -32,6 +33,7 @@ const Grid = () => {
     const [Tablet, setTablet] = React.useState(false)
     const [filterIcon, setFIlterIcon] = React.useState(false)
     const [ActiveLoader, setActiveLoader] = React.useState(false)
+    const [PorductNotFound , setPorductNotFound] = React.useState(false)
 
 
 
@@ -241,10 +243,17 @@ const Grid = () => {
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
+        console.log(data);
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/filter", data).then(result => {
-                setProductsParams(result)
+                console.log(result.data.products)
                 setActiveLoader(false);
+                if (result.data.products.lenght > 0) {
+                    setProductsParams(result)                    
+                }
+                else{
+                    setPorductNotFound(true);
+                }
             })
         });
     }
@@ -256,7 +265,7 @@ const Grid = () => {
             <div className={'filterForDbContainer'}>
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
-                    <span onClick={() => {GetProductsList();setPhone(false); setLaptop(false); setTablet(false); setFIlterParams({})}}>Всі</span>
+                    <span onClick={() => { GetProductsList(); setPhone(false); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Всі</span>
                     <span onClick={() => { FindByCateogry('Phone'); setPhone(true); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Телефони</span>
                     <span onClick={() => { FindByCateogry('Tablet'); setPhone(false); setLaptop(false); setTablet(true); setFIlterParams({}) }}>Планшети</span>
                     <span onClick={() => { FindByCateogry('Laptop'); setPhone(false); setLaptop(true); setTablet(false); setFIlterParams({}) }}>Ноутбуки</span>
@@ -297,6 +306,18 @@ const Grid = () => {
             <div className={'productsContainer'}>
                 {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}
             </div>
+            <Rodal width={400}
+                height={550}
+                measure={'px'}
+                closeMaskOnClick={true}
+                visible={PorductNotFound}
+                onClose={() =>  setPorductNotFound()}
+                animation={'fade'}>
+                
+                    <div className={'PorductNotFound'}>
+                        Товар за вказаними характеристиками не найдено
+                    </div>
+            </Rodal>
         </div>
     )
 }
