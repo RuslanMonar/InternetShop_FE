@@ -284,7 +284,15 @@ input::-webkit-inner-spin-button {
     justify-content: center;
     padding: 7%;
 }
-
+.PorductNotFound{
+    display: flex;
+    align-items: center;
+    height: 90%;
+    text-align: center;
+    font-size: 25px;
+    background: #f77373;
+    margin-top: 35px;
+}
 
 @media only screen and (max-width: 1400px) {
     .productItem {
