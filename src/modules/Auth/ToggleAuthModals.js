@@ -1,26 +1,39 @@
-import React from 'react';
-import AuthContext from './../../contexts/AuthContext';
+import api from './ApiAxios';
 
-export const ToggleRegisterModal = () => {
-  const { RegisterVisible, setRegisterVisible } = React.useContext(AuthContext);
-  setRegisterVisible(!RegisterVisible);
- 
+export const ToggleRegisterModal = (AuthModalsSwitcher) => {
+  AuthModalsSwitcher.setRegisterVisible(!AuthModalsSwitcher.RegisterVisible);
 }
 
 
-export const ToggleLoginModal = () => {
-  const { LoginVisible, setLoginVisible } = React.useContext(AuthContext);
-  setLoginVisible(!LoginVisible);
+export const ToggleLoginModal = (AuthModalsSwitcher) => {
+  AuthModalsSwitcher.setLoginVisible(!AuthModalsSwitcher.LoginVisible);
 }
 
-export  const ToggleAuthModals = (status) => {
+export const ToggleAuthModals = (status, AuthModalsSwitcher) => {
   if (status == "CloseRegistrationFirst") {
-    ToggleRegisterModal()
-    ToggleLoginModal()
+    ToggleRegisterModal(AuthModalsSwitcher)
+    ToggleLoginModal(AuthModalsSwitcher)
   }
   else if (status == 'CloseLoginFirst') {
-    ToggleLoginModal()
-    ToggleRegisterModal()
+    ToggleLoginModal(AuthModalsSwitcher)
+    ToggleRegisterModal(AuthModalsSwitcher)
   }
 }
 
+export const WhenSignIn = (name, AuthModalsSwitcher, LoginAfterRegistration) => {
+  AuthModalsSwitcher.setLogged(!AuthModalsSwitcher.isLoggedIn)
+  AuthModalsSwitcher.setUserName(name)
+  if (LoginAfterRegistration === false) {
+    ToggleLoginModal( AuthModalsSwitcher )
+  }
+}
+
+
+export const Username = (setUserName) => {
+  api().get('/sanctum/csrf-cookie').then(response => {
+    api().get("/api/username").then(result => {
+      setUserName(result.data.name)
+      return result.data.name
+    })
+  });
+}

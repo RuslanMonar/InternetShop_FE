@@ -1,7 +1,5 @@
 import Cookies from 'js-cookie'
 import api from './ApiAxios';
-import AuthContext from './../../contexts/AuthContext';
-import  React  from 'react';
 
 export const CheckAuthCookie = () => {
     return !!Cookies.get('ticket_management_is_user_logged_in')
@@ -19,36 +17,34 @@ export const DeleteAuthCookie = () => {
     }
 }
 
-export const SignIn = (email, password, LoginAfterRegistration = false) => {
-    const { SetAlertMistake, WhenSignIn } = React.useContext(AuthContext);
+export const SignIn = (email, password, modalFunc, LoginAfterRegistration = false) => {
     let data = { email, password }
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/login", data).then(result => {
             if (result.status === 200) {
                 SetAuthCookie()
-                SetAlertMistake(false)
-                WhenSignIn(result.data.name, LoginAfterRegistration)
+                modalFunc.SetAlertMistake(false)
+                modalFunc.WhenSignIn(result.data.name, modalFunc.AuthModalsSwitcher, LoginAfterRegistration)
             }
         }).catch(err => {
-            SetAlertMistake(true)
+            modalFunc.SetAlertMistake(true)
             console.log('Невірний логін або пароль');
         })
     });
 }
 
 
-export const SingUp = (name, email, password) => {
-    const { ToggleRegisterModal, SetAlertMistake } = React.useContext(AuthContext);
+export const SingUp = (name, email, password, modalFunc) => {
     let data = { name, email, password }
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/register", data).then(result => {
             if (result.status === 200) {
-                SignIn(email, password, true)
-                SetAlertMistake(false)
-                ToggleRegisterModal();
+                SignIn(email, password, modalFunc, true)
+                modalFunc.SetAlertMistake(false)
+                modalFunc.ToggleRegisterModal(modalFunc.AuthModalsSwitcher);
             }
         }).catch(err => {
-            SetAlertMistake(true)
+            modalFunc.SetAlertMistake(true)
             console.log('Цей email вже зайнятий');
         })
     })
@@ -63,4 +59,37 @@ export const SignOut = (isLoggedIn, setLogged) => {
             }
         })
     })
+}
+
+
+export const GoogleSignInResponse = (response, modalFunc) => {
+    if (response) {
+        if (response.error === undefined) {
+            response = response.profileObj;
+            SignIn(response.email, response.googleId, modalFunc)
+        } else {
+            console.log(response.error)
+        }
+    }
+}
+
+
+export const GoogleSignUpResponse = (response, modalFunc) => {
+    if (response && response.error === undefined) {
+        response = response.profileObj;
+        SingUp(response.name, response.email, response.googleId, modalFunc)
+    } else {
+        console.log(response.error)
+    }
+}
+
+export const FacebookSignInResponse = (response, modalFunc) => {
+    if (response.error === undefined) {
+        SignIn(response.email, response.userID, modalFunc)
+    }
+}
+
+
+export const FacebookSignUpResponse = (response, modalFunc) => {
+    SingUp(response.name, response.email, response.userID, modalFunc)
 }

@@ -1,29 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classes from '../../css/style.module.css';
-import { SingUp } from './Auth';
+import { SingUp, GoogleSignUpResponse, FacebookSignUpResponse } from './Auth';
 import GoogleSignUp from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import AuthContext from './../../contexts/AuthContext';
 
-const Registration = () => {
+const Registration = ({AuthModalsSwitcher}) => {
     const [name, setName] = React.useState("")
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
 
-    const {ToggleAuthModals , AlertMistake} = React.useContext(AuthContext);
-
-    const GoogleSignUpResponse = (response) => {
-        if (response.error === undefined) {
-            response = response.profileObj;
-            SingUp(response.name, response.email, response.googleId)
-        } else {
-            console.log(response.error)
-        }
-    }
-
-    const FacebookSignUpResponse = (response) => {
-        SingUp(response.name, response.email, response.userID)
-    }
+    const { ToggleAuthModals, ToggleRegisterModal, SetAlertMistake, AlertMistake, WhenSignIn } = React.useContext(AuthContext);
+    const modalFunc = { ToggleRegisterModal, SetAlertMistake, WhenSignIn , AuthModalsSwitcher};
 
 
     return (
@@ -34,7 +22,7 @@ const Registration = () => {
                 <input className={classes.un} value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
                 <input className={classes.un} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                 {AlertMistake ? (<div className={classes.authError} >Цей email вже зайнятий</div>) : (<span></span>)}
-                <a className={classes.submit} onClick={() => SingUp(name, email, password)} align="center">Зареєструватися</a>
+                <a className={classes.submit} onClick={() => SingUp(name, email, password, modalFunc)} align="center">Зареєструватися</a>
             </form>
             <span className={classes.otherOption}>
                 Або
@@ -52,15 +40,15 @@ const Registration = () => {
                         </div>
                     )}
                     buttonText="Sign in with Google"
-                    onSuccess={GoogleSignUpResponse}
-                    onFailure={GoogleSignUpResponse}
+                    onSuccess={response => GoogleSignUpResponse(response, modalFunc)}
+                    onFailure={response => GoogleSignUpResponse(response, modalFunc)}
                     cookiePolicy={'single_host_origin'}
                 />
                 <FacebookLogin
                     appId="183494546770953"
                     autoLoad={true}
                     fields="name,email,picture"
-                    callback={FacebookSignUpResponse}
+                    callback={response => FacebookSignUpResponse(response, modalFunc)}
                     render={renderProps => (
                         <div onClick={renderProps.onClick} className={classes.SocialMediaIcon}>
                             <img src="/img/facebook.png" />
@@ -69,7 +57,7 @@ const Registration = () => {
                     )}
                 />
             </div>
-            <div className={classes.otherProp} onClick={() => ToggleAuthModals('CloseRegistrationFirst')}>
+            <div className={classes.otherProp} onClick={() => ToggleAuthModals('CloseRegistrationFirst' , AuthModalsSwitcher)}>
                 Вже є аккаунт? <span className={classes.AuthButton} >Ввійти</span>
             </div>
         </React.Fragment>

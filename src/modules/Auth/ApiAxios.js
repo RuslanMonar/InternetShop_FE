@@ -8,7 +8,7 @@ export default function api() {
         baseURL: 'http://localhost:8000',
         withCredentials: true,
     })
-    api.interceptors.response.use(response => console.log(response.data), error => {
+    api.interceptors.response.use(response => response, error => {
         if(error.message == 'Network Error' && !error.status){ 
             Promise.reject()
             history.push('/network_error')
@@ -21,11 +21,11 @@ export default function api() {
             Promise.reject()
             history.push('/502')
         }
-        else if (error.response.status === 401) {
-            DeleteAuthCookie()
-            Promise.reject()
-            history.push('/401')
-        }
+        // else if (error.response.status === 401) {
+        //     DeleteAuthCookie()
+        //     Promise.reject()
+        //     history.push('/401')
+        // }
         else if (error.response.status === 404) {
             Promise.reject()
             history.push('/404')

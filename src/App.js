@@ -1,4 +1,3 @@
-import api from './modules/Auth/ApiAxios';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './routes/Home/Home';
@@ -8,53 +7,17 @@ import AuthContext from './contexts/AuthContext';
 import Main from './routes/Products/Main';
 import About from './routes/AboutUs/AboutUs';
 import { NetworkError, Error_500, Error_502, Error_404, Error_401 } from './modules/Errors/Errors';
-//import {ToggleLoginModal , ToggleRegisterModal , ToggleAuthModals} from './modules/Auth/ToggleAuthModals'
+import { ToggleLoginModal, ToggleRegisterModal, ToggleAuthModals, Username, WhenSignIn } from './modules/Auth/ToggleAuthModals'
 
 
 function App() {
 
-
-  const Username = () => {
-    api().get('/sanctum/csrf-cookie').then(response => {
-      api().get("/api/username").then(result => {
-        setUserName(result.data.name)
-        return result.data.name
-      })
-    });
-  }
-
   const [isLoggedIn, setLogged] = React.useState(CheckAuthCookie);
-  const [UserName, setUserName] = React.useState(() => { if (isLoggedIn) return Username() });
+  const [UserName, setUserName] = React.useState('');
+  if (isLoggedIn) Username(setUserName);
   const [RegisterVisible, setRegisterVisible] = React.useState(false);
   const [LoginVisible, setLoginVisible] = React.useState(false);
   const [AlertMistake, SetAlertMistake] = React.useState(false);
-
-  const ToggleRegisterModal = () => {
-    setRegisterVisible(!RegisterVisible);
-  }
-
-  const ToggleLoginModal = () => {
-    setLoginVisible(!LoginVisible);
-  }
-
-  const ToggleAuthModals = (status) => {
-    if (status == "CloseRegistrationFirst") {
-      ToggleRegisterModal()
-      ToggleLoginModal()
-    }
-    else if (status == 'CloseLoginFirst') {
-      ToggleLoginModal()
-      ToggleRegisterModal()
-    }
-  }
-
-  const WhenSignIn = (name, LoginAfterRegistration) => {
-    setLogged(!isLoggedIn)
-    setUserName(name)
-    if (LoginAfterRegistration === false) {
-      ToggleLoginModal()
-    }
-  }
 
 
 

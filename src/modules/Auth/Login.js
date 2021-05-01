@@ -1,32 +1,20 @@
 import React from 'react';
 import classes from '../../css/style.module.css';
-import { SignIn } from './Auth';
+import { SignIn, GoogleSignInResponse, FacebookSignInResponse } from './Auth';
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import AuthContext from './../../contexts/AuthContext';
 
-const Login = () => {
+
+
+const Login = ({ AuthModalsSwitcher }) => {
     const [name, setName] = React.useState("")
     const [password, setPassword] = React.useState("")
 
-    const {AlertMistake,ToggleAuthModals} = React.useContext(AuthContext);
+    const { AlertMistake, ToggleAuthModals, SetAlertMistake, WhenSignIn } = React.useContext(AuthContext);
+    const modalFunc = { SetAlertMistake, WhenSignIn, AuthModalsSwitcher }
 
 
-    const GoogleSignInResponse = (response) => {
-        if (response.error === undefined) {
-            response = response.profileObj;
-            SignIn(response.email, response.googleId)
-        } else {
-            console.log(response.error)
-        }
-    }
-
-    const FacebookSignInResponse = (response) => {
-        if (response.error === undefined) {
-            SignIn(response.email, response.userID)
-        }
-    }
-    
     return (
         <React.Fragment>
             <span className={classes.sign} align="center">Авторизація </span>
@@ -34,7 +22,7 @@ const Login = () => {
                 <input className={classes.un} value={name} onChange={(e) => setName(e.target.value)} type="email" placeholder="Email" />
                 <input className={classes.un} value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
                 {AlertMistake ? (<div className={classes.authError} >Неправильний логін або пароль</div>) : (<span></span>)}
-                <a className={classes.submit} onClick={() => SignIn(name, password)} align="center">Війти</a>
+                <a className={classes.submit} onClick={() => SignIn(name, password, modalFunc)} align="center">Війти</a>
             </form>
             <span className={classes.otherOption}>
                 Або
@@ -52,15 +40,15 @@ const Login = () => {
                         </div>
                     )}
                     buttonText="Sign in with Google"
-                    onSuccess={GoogleSignInResponse}
-                    onFailure={GoogleSignInResponse}
+                    onSuccess={response => GoogleSignInResponse(response, modalFunc)}
+                    onFailure={response => GoogleSignInResponse(response, modalFunc)}
                     cookiePolicy={'single_host_origin'}
                 />
                 <FacebookLogin
                     appId="183494546770953"
                     autoLoad={true}
                     fields="name,email,picture"
-                    callback={FacebookSignInResponse}
+                    callback={response => FacebookSignInResponse(response, modalFunc)}
                     render={renderProps => (
                         <div onClick={renderProps.onClick} className={classes.SocialMediaIcon}>
                             <img src="/img/facebook.png" />
@@ -69,7 +57,7 @@ const Login = () => {
                     )}
                 />
             </div>
-            <div className={classes.otherProp} onClick={() => ToggleAuthModals('CloseLoginFirst')}>
+            <div className={classes.otherProp} onClick={() => ToggleAuthModals('CloseLoginFirst', AuthModalsSwitcher)}>
                 Ще не зарєстровані? <span className={classes.AuthButton} >Зареєструватися</span>
             </div>
         </React.Fragment>
