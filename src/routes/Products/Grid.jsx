@@ -138,23 +138,19 @@ const Grid = () => {
 
     const GetProductsList = () => {
         setActiveLoader(true);
-        api().get('/sanctum/csrf-cookie').then(response => {
-            api().post("/api/products").then(result => {
-                setProductsParams(result)
-                setActiveLoader(false);
-            })
-        });
+        api().post("/api/products").then(result => {
+            setProductsParams(result)
+            setActiveLoader(false);
+        })
     }
 
     const FindByCateogry = (categoryName) => {
         setActiveLoader(true);
         let data = { name: categoryName }
-        api().get('/sanctum/csrf-cookie').then(response => {
-            api().post("/api/category", data).then(result => {
-                setProductsParams(result)
-                setActiveLoader(false);
-            })
-        });
+        api().post("/api/category", data).then(result => {
+            setProductsParams(result)
+            setActiveLoader(false);
+        })
     }
 
     const setProductsParams = (result) => {
@@ -241,24 +237,22 @@ const Grid = () => {
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
-        api().get('/sanctum/csrf-cookie').then(response => {
-            api().post("/api/filter", data).then(result => {
-                setProductsParams(result)
-                setActiveLoader(false);
-            })
-        });
+        api().post("/api/filter", data).then(result => {
+            setProductsParams(result)
+            setActiveLoader(false);
+        })
     }
 
     const test = (value) => {
-        if(value === 'Phone'){
-            
+        if (value === 'Phone') {
+
         }
     }
 
     const keyMap = {
         Phone: false,
-        Laptop:false,
-        Table:false
+        Laptop: false,
+        Table: false
     }
 
     return (
@@ -267,7 +261,7 @@ const Grid = () => {
             <div className={'filterForDbContainer'}>
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
-                    <span onClick={() => {GetProductsList();setPhone(false); setLaptop(false); setTablet(false); setFIlterParams({})}}>Всі</span>
+                    <span onClick={() => { GetProductsList(); setPhone(false); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Всі</span>
                     <span onClick={() => { FindByCateogry('Phone'); test('Phone'); setPhone(true); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Телефони</span>
                     <span onClick={() => { FindByCateogry('Tablet'); setPhone(false); setLaptop(false); setTablet(true); setFIlterParams({}) }}>Планшети</span>
                     <span onClick={() => { FindByCateogry('Laptop'); setPhone(false); setLaptop(true); setTablet(false); setFIlterParams({}) }}>Ноутбуки</span>
