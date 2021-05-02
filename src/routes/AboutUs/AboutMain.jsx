@@ -2,16 +2,18 @@ import React from 'react';
 
 import Header from './../../modules/Navigation/Header';
 import  Footer  from './../../modules/Navigation/Footer';
+import About from './AboutUs';
 
 
 
-const Home = () => {
+const AboutUsMain = () => {
     return (
         <div>
             <Header />
-            <Footer />
+            <About />  
+            <Footer />         
         </div>
     )
 }
 
-export default Home
+export default AboutUsMain

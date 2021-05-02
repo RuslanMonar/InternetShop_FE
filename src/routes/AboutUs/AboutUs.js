@@ -1,12 +1,8 @@
 import React from "react";
-import Header from "../../modules/Navigation/Header";
 import "../../css/style.aboutUs.css";
-import Footer from "../../modules/Navigation/Footer";
-const About = () => {
+const AboutUs = () => {
   return (
     <div>
-      <Header />
-
       <p className="titleAboutUs"> Про Нас </p>
       <div className="container">
         <p className="AboutUsText">
@@ -102,10 +98,8 @@ const About = () => {
         </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
 
-export default About;
+export default AboutUs;
