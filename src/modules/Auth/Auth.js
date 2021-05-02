@@ -14,6 +14,8 @@ export const DeleteAuthCookie = () => {
     if (typeof window !== 'undefined') {
         //expires -> час життя кукі sameSite -> параметр безпеки для захисту кукі
         Cookies.remove('ticket_management_is_user_logged_in', { expires: 86400, sameSite: 'lax' });
+        Cookies.remove('laravel_session',{ path: '/'});
+        Cookies.remove('XSRF-TOKEN');
     }
 }
 
