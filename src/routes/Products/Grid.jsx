@@ -140,23 +140,19 @@ const Grid = () => {
 
     const GetProductsList = () => {
         setActiveLoader(true);
-        api().get('/sanctum/csrf-cookie').then(response => {
-            api().post("/api/products").then(result => {
-                setProductsParams(result)
-                setActiveLoader(false);
-            })
-        });
+        api().post("/api/products").then(result => {
+            setProductsParams(result)
+            setActiveLoader(false);
+        })
     }
 
     const FindByCateogry = (categoryName) => {
         setActiveLoader(true);
         let data = { name: categoryName }
-        api().get('/sanctum/csrf-cookie').then(response => {
-            api().post("/api/category", data).then(result => {
-                setProductsParams(result)
-                setActiveLoader(false);
-            })
-        });
+        api().post("/api/category", data).then(result => {
+            setProductsParams(result)
+            setActiveLoader(false);
+        })
     }
 
     const setProductsParams = (result) => {
@@ -169,40 +165,6 @@ const Grid = () => {
         setHigherPrice({ max: price.higherPrice })
         setLowerPrice({ min: price.lowerPrice })
     }
-
-    // const insertParam = (key, value) => {
-    //     let delteArray = false;
-    //     if (!filterParams[key]) {
-    //         filterParams[key] = [];
-    //     }
-    //     if (Array.isArray(value) && value.length == 2 && value !== null) {
-    //         if (filterParams[key][0] !== 'Interval') {
-    //             filterParams[key].unshift('Interval');
-    //         }
-    //         if (Array.isArray(value) && value.length == 2 && value !== null) {
-    //             filterParams[key].forEach(element => {
-    //                 if (element.length === value.length && element.every(function (val, index) { return val === value[index] })) {
-    //                     let elementIndex = filterParams[key].indexOf(element);
-    //                     filterParams[key].splice(elementIndex, 1);
-    //                     delteArray = true;
-    //                 }
-    //             });
-    //         }
-
-    //     }
-    //     if (key === 'lower_price' || key === 'higher_price') {
-    //         filterParams[key].pop()
-    //     }
-    //     if (filterParams[key].includes(value)) {
-    //         filterParams[key] = filterParams[key].filter(e => e !== value);
-
-    //     }
-    //     else {
-    //         if (!delteArray) {
-    //             filterParams[key].push(value)
-    //         }
-    //     }
-    // }
 
     const insertParam = (key, value, searchType = null) => {
         let delteArray = false;
@@ -243,8 +205,6 @@ const Grid = () => {
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
-        console.log(data);
-        api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/filter", data).then(result => {
                 console.log(result.data.products)
                 setActiveLoader(false);
@@ -255,19 +215,18 @@ const Grid = () => {
                     setPorductNotFound(true);
                 }
             })
-        });
     }
 
     const test = (value) => {
-        if(value === 'Phone'){
-            
+        if (value === 'Phone') {
+
         }
     }
 
     const keyMap = {
         Phone: false,
-        Laptop:false,
-        Table:false
+        Laptop: false,
+        Table: false
     }
 
     return (

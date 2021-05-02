@@ -9,7 +9,7 @@ export default function api() {
         withCredentials: true,
     })
     api.interceptors.response.use(response => response, error => {
-        if(error.message == 'Network Error' && !error.status){ 
+        if (error.message == 'Network Error' && !error.status) {
             Promise.reject()
             history.push('/network_error')
         }

@@ -14,13 +14,15 @@ export const DeleteAuthCookie = () => {
     if (typeof window !== 'undefined') {
         //expires -> час життя кукі sameSite -> параметр безпеки для захисту кукі
         Cookies.remove('ticket_management_is_user_logged_in', { expires: 86400, sameSite: 'lax' });
+        Cookies.remove('laravel_session',{ path: '/'});
+        Cookies.remove('XSRF-TOKEN');
     }
 }
 
 export const SignIn = (email, password, modalFunc, LoginAfterRegistration = false) => {
     let data = { email, password }
-    api().get('/sanctum/csrf-cookie').then(response => {
-        api().post("/api/login", data).then(result => {
+    api(true).get('/sanctum/csrf-cookie').then(response => {
+        api(true).post("/api/login", data).then(result => {
             if (result.status === 200) {
                 SetAuthCookie()
                 modalFunc.SetAlertMistake(false)
@@ -36,8 +38,8 @@ export const SignIn = (email, password, modalFunc, LoginAfterRegistration = fals
 
 export const SingUp = (name, email, password, modalFunc) => {
     let data = { name, email, password }
-    api().get('/sanctum/csrf-cookie').then(response => {
-        api().post("/api/register", data).then(result => {
+    api(true).get('/sanctum/csrf-cookie').then(response => {
+        api(true).post("/api/register", data).then(result => {
             if (result.status === 200) {
                 SignIn(email, password, modalFunc, true)
                 modalFunc.SetAlertMistake(false)
@@ -51,8 +53,8 @@ export const SingUp = (name, email, password, modalFunc) => {
 }
 
 export const SignOut = (isLoggedIn, setLogged) => {
-    api().get('/sanctum/csrf-cookie').then(response => {
-        api().post("/api/logout").then(result => {
+    api(true).get('/sanctum/csrf-cookie').then(response => {
+        api(true).post("/api/logout").then(result => {
             if (result.status === 200) {
                 DeleteAuthCookie()
                 setLogged(!isLoggedIn)

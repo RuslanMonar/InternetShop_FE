@@ -30,10 +30,8 @@ export const WhenSignIn = (name, AuthModalsSwitcher, LoginAfterRegistration) => 
 
 
 export const Username = (setUserName) => {
-  api().get('/sanctum/csrf-cookie').then(response => {
     api().get("/api/username").then(result => {
       setUserName(result.data.name)
       return result.data.name
     })
-  });
 }
