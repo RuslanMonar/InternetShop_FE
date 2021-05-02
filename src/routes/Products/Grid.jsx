@@ -12,7 +12,7 @@ import { } from '@fortawesome/free-brands-svg-icons'
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-import  Rodal  from 'rodal';
+import Rodal from 'rodal';
 
 const Grid = () => {
 
@@ -33,7 +33,7 @@ const Grid = () => {
     const [Tablet, setTablet] = React.useState(false)
     const [filterIcon, setFIlterIcon] = React.useState(false)
     const [ActiveLoader, setActiveLoader] = React.useState(false)
-    const [PorductNotFound , setPorductNotFound] = React.useState(false)
+    const [PorductNotFound, setPorductNotFound] = React.useState(false)
 
 
 
@@ -205,16 +205,17 @@ const Grid = () => {
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
-            api().post("/api/filter", data).then(result => {
-                console.log(result.data.products)
-                setActiveLoader(false);
-                if (result.data.products.lenght > 0) {
-                    setProductsParams(result)                    
-                }
-                else{
-                    setPorductNotFound(true);
-                }
-            })
+        api().post("/api/filter", data).then(result => {
+            console.log(result.data.products)
+            setActiveLoader(false);
+            if (Object.keys(result.data.products).length > 0) {
+                setProductsParams(result)
+            }
+            else {
+                console.log()
+                setPorductNotFound(true);
+            }
+        })
     }
 
     const test = (value) => {
@@ -283,11 +284,11 @@ const Grid = () => {
                 measure={'px'}
                 closeMaskOnClick={true}
                 visible={PorductNotFound}
-                onClose={() =>  setPorductNotFound()}
+                onClose={() => setPorductNotFound()}
                 animation={'fade'}>
-                
-                    <div className={'PorductNotFound'}>
-                        Товар за вказаними характеристиками не найдено
+
+                <div className={'PorductNotFound'}>
+                    Товар за вказаними характеристиками не найдено
                     </div>
             </Rodal>
         </div>
