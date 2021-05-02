@@ -12,6 +12,7 @@ import { } from '@fortawesome/free-brands-svg-icons'
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import  Rodal  from 'rodal';
 
 const Grid = () => {
 
@@ -32,6 +33,7 @@ const Grid = () => {
     const [Tablet, setTablet] = React.useState(false)
     const [filterIcon, setFIlterIcon] = React.useState(false)
     const [ActiveLoader, setActiveLoader] = React.useState(false)
+    const [PorductNotFound , setPorductNotFound] = React.useState(false)
 
 
 
@@ -164,40 +166,6 @@ const Grid = () => {
         setLowerPrice({ min: price.lowerPrice })
     }
 
-    // const insertParam = (key, value) => {
-    //     let delteArray = false;
-    //     if (!filterParams[key]) {
-    //         filterParams[key] = [];
-    //     }
-    //     if (Array.isArray(value) && value.length == 2 && value !== null) {
-    //         if (filterParams[key][0] !== 'Interval') {
-    //             filterParams[key].unshift('Interval');
-    //         }
-    //         if (Array.isArray(value) && value.length == 2 && value !== null) {
-    //             filterParams[key].forEach(element => {
-    //                 if (element.length === value.length && element.every(function (val, index) { return val === value[index] })) {
-    //                     let elementIndex = filterParams[key].indexOf(element);
-    //                     filterParams[key].splice(elementIndex, 1);
-    //                     delteArray = true;
-    //                 }
-    //             });
-    //         }
-
-    //     }
-    //     if (key === 'lower_price' || key === 'higher_price') {
-    //         filterParams[key].pop()
-    //     }
-    //     if (filterParams[key].includes(value)) {
-    //         filterParams[key] = filterParams[key].filter(e => e !== value);
-
-    //     }
-    //     else {
-    //         if (!delteArray) {
-    //             filterParams[key].push(value)
-    //         }
-    //     }
-    // }
-
     const insertParam = (key, value, searchType = null) => {
         let delteArray = false;
         if (!filterParams[key]) {
@@ -237,10 +205,16 @@ const Grid = () => {
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
-        api().post("/api/filter", data).then(result => {
-            setProductsParams(result)
-            setActiveLoader(false);
-        })
+            api().post("/api/filter", data).then(result => {
+                console.log(result.data.products)
+                setActiveLoader(false);
+                if (result.data.products.lenght > 0) {
+                    setProductsParams(result)                    
+                }
+                else{
+                    setPorductNotFound(true);
+                }
+            })
     }
 
     const test = (value) => {
@@ -261,8 +235,10 @@ const Grid = () => {
             <div className={'filterForDbContainer'}>
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
+
                     <span onClick={() => { GetProductsList(); setPhone(false); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Всі</span>
-                    <span onClick={() => { FindByCateogry('Phone'); test('Phone'); setPhone(true); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Телефони</span>
+                    <span onClick={() => { FindByCateogry('Phone'); setPhone(true); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Телефони</span>
+
                     <span onClick={() => { FindByCateogry('Tablet'); setPhone(false); setLaptop(false); setTablet(true); setFIlterParams({}) }}>Планшети</span>
                     <span onClick={() => { FindByCateogry('Laptop'); setPhone(false); setLaptop(true); setTablet(false); setFIlterParams({}) }}>Ноутбуки</span>
                 </div>
@@ -302,6 +278,18 @@ const Grid = () => {
             <div className={'productsContainer'}>
                 {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}
             </div>
+            <Rodal width={400}
+                height={550}
+                measure={'px'}
+                closeMaskOnClick={true}
+                visible={PorductNotFound}
+                onClose={() =>  setPorductNotFound()}
+                animation={'fade'}>
+                
+                    <div className={'PorductNotFound'}>
+                        Товар за вказаними характеристиками не найдено
+                    </div>
+            </Rodal>
         </div>
     )
 }
