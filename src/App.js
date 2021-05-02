@@ -1,40 +1,37 @@
-import api from './modules/Auth/ApiAxios';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './routes/Home/Home';
-import {CheckAuthCookie} from './modules/Auth/Auth';
-
+import { CheckAuthCookie } from './modules/Auth/Auth';
 import React from 'react';
 import AuthContext from './contexts/AuthContext';
 import Main from './routes/Products/Main';
 import About from './routes/AboutUs/AboutUs';
-import Error_500 from './modules/Errors/Error_500';
-import Error_502 from './modules/Errors/Error_500';
-import Error_404 from './modules/Errors/Error_500';
-import Error_401 from './modules/Errors/Error_401';
-import NetworkError from './modules/Errors/NetworkError';
+import { NetworkError, Error_500, Error_502, Error_404, Error_401 } from './modules/Errors/Errors';
+import { ToggleLoginModal, ToggleRegisterModal, ToggleAuthModals, Username, WhenSignIn } from './modules/Auth/ToggleAuthModals'
+
 
 function App() {
-  const Username = () => {
-    api().get('/sanctum/csrf-cookie').then(response => {
-      api().get("/api/username").then(result => {
-        setUserName(result.data.name)
-        return result.data.name
-      })
-    });
-  }
-  
+
   const [isLoggedIn, setLogged] = React.useState(CheckAuthCookie);
-  const [UserName, setUserName] = React.useState(() => {
-    if (isLoggedIn) {
-      return Username()
-    }
-  })
+  const [UserName, setUserName] = React.useState('');
+  if (isLoggedIn) Username(setUserName);
+  const [RegisterVisible, setRegisterVisible] = React.useState(false);
+  const [LoginVisible, setLoginVisible] = React.useState(false);
+  const [AlertMistake, SetAlertMistake] = React.useState(false);
+
 
 
   return (
     <Switch>
-      <AuthContext.Provider value={{ UserName, setUserName, isLoggedIn, setLogged }}>
+      <AuthContext.Provider value={{
+        UserName, setUserName,
+        isLoggedIn, setLogged,
+        RegisterVisible, setRegisterVisible,
+        LoginVisible, setLoginVisible,
+        AlertMistake, SetAlertMistake,
+        ToggleAuthModals, ToggleRegisterModal, ToggleLoginModal,
+        WhenSignIn
+      }}>
         <Route path="/" exact component={Home} />
         <Route path="/products" exact component={Main} />
         <Route path="/about" exact component={About} />

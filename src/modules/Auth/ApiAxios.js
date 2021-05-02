@@ -21,6 +21,13 @@ export default function api() {
             Promise.reject()
             history.push('/502')
         }
+
+        // else if (error.response.status === 401) {
+        //     DeleteAuthCookie()
+        //     Promise.reject()
+        //     history.push('/401')
+        // }
+
         else if (error.response.status === 404) {
             Promise.reject()
             history.push('/404')

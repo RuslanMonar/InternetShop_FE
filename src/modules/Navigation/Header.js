@@ -12,40 +12,18 @@ import SearchForm from '../search_form/SearchForm';
 
 const Header = () => {
     var Link = require('react-router-dom').Link
-    const [RegisterVisible, setRegisterVisible] = React.useState(false);
-    const [LoginVisible, setLoginVisible] = React.useState(false);
-
-    const [AlertMistake, SetAlertMistake] = React.useState(false)
     const [responsiveMenu, setMenu] = React.useState(false)
-    const { isLoggedIn, setLogged, UserName, setUserName } = useContext(AuthContext);
+    const {
+        setUserName,
+        isLoggedIn, setLogged,
+        UserName,
+        RegisterVisible, setRegisterVisible,
+        LoginVisible, setLoginVisible,
+        SetAlertMistake,
+        ToggleRegisterModal, ToggleLoginModal
+    } = useContext(AuthContext);
 
-    const ToggleRegisterModal = () => {
-        setRegisterVisible(!RegisterVisible)
-    }
-
-    const ToggleLoginModal = () => {
-        setLoginVisible(!LoginVisible)
-    }
-
-    const ToggleAuthModals = (status) => {
-        if (status == "CloseRegistrationFirst") {
-            ToggleRegisterModal()
-            ToggleLoginModal()
-        }
-        else if (status == 'CloseLoginFirst') {
-            ToggleLoginModal()
-            ToggleRegisterModal()
-        }
-    }
-
-
-    const WhenSignIn = (name, LoginAfterRegistration) => {
-        setLogged(!isLoggedIn)
-        setUserName(name)
-        if (LoginAfterRegistration === false) {
-            ToggleLoginModal()
-        }
-    }
+    const AuthModalsSwitcher = { LoginVisible, setLoginVisible, RegisterVisible, setRegisterVisible, setLogged, isLoggedIn, setUserName }
 
     return (
         <div className={classes.header}>
@@ -68,15 +46,12 @@ const Header = () => {
                         ) : (
                             <React.Fragment>
                                 <img src="/img/registration.png" />
-                                <span
-                                    onClick={ToggleRegisterModal}
+                                <span onClick={() => ToggleRegisterModal(AuthModalsSwitcher)}
                                 >Реєстрація</span>
                                 <img src="/img/login.png" />
-                                <span
-                                    onClick={ToggleLoginModal}
+                                <span onClick={() => ToggleLoginModal(AuthModalsSwitcher)}
                                 >Вхід</span>
                             </React.Fragment>
-
                         )}
                     </div >
                     <div className={classes.basket}>
@@ -100,40 +75,28 @@ const Header = () => {
                 <span>Бзкоштовна Доставка - Безкоштовне Повернення</span>
             </div>
 
-            <Rodal width={400}
+            <Rodal
+                width={400}
                 height={550}
                 measure={'px'}
                 closeMaskOnClick={true}
                 visible={RegisterVisible}
-
-                onClose={() => { ToggleRegisterModal(); SetAlertMistake(false) }}
+                onClose={() => { ToggleRegisterModal(AuthModalsSwitcher); SetAlertMistake(false) }}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
-
-                <Registration
-                    ToggleAuthModals={ToggleAuthModals}
-                    ToggleRegisterModal={ToggleRegisterModal}
-                    WhenSignIn={WhenSignIn}
-                    SetAlertMistake={SetAlertMistake}
-                    AlertMistake={AlertMistake} />
+                <Registration AuthModalsSwitcher={AuthModalsSwitcher} />
             </Rodal>
 
-            <Rodal width={400}
+            <Rodal
+                width={400}
                 height={500}
                 measure={'px'}
                 closeMaskOnClick={true}
                 visible={LoginVisible}
-
-                onClose={() => { ToggleLoginModal(); SetAlertMistake(false) }}
+                onClose={() => { ToggleLoginModal(AuthModalsSwitcher); SetAlertMistake(false) }}
                 className={classes['rodal-close', 'rodal-dialog']}
                 animation={'fade'}>
-
-                <Login
-                    ToggleAuthModals={ToggleAuthModals}
-                    WhenSignIn={WhenSignIn}
-                    SetAlertMistake={SetAlertMistake}
-                    AlertMistake={AlertMistake} />
-
+                <Login AuthModalsSwitcher={AuthModalsSwitcher} />
             </Rodal>
 
         </div>

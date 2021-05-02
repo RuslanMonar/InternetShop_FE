@@ -258,6 +258,17 @@ const Grid = () => {
         });
     }
 
+    const test = (value) => {
+        if(value === 'Phone'){
+            
+        }
+    }
+
+    const keyMap = {
+        Phone: false,
+        Laptop:false,
+        Table:false
+    }
 
     return (
         <div className={'GridContainer'}>
@@ -265,8 +276,10 @@ const Grid = () => {
             <div className={'filterForDbContainer'}>
                 <div className={'manufacturer'}>
                     <span className={'CharacteristicTitle'}>Тип товару:</span>
+
                     <span onClick={() => { GetProductsList(); setPhone(false); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Всі</span>
                     <span onClick={() => { FindByCateogry('Phone'); setPhone(true); setLaptop(false); setTablet(false); setFIlterParams({}) }}>Телефони</span>
+
                     <span onClick={() => { FindByCateogry('Tablet'); setPhone(false); setLaptop(false); setTablet(true); setFIlterParams({}) }}>Планшети</span>
                     <span onClick={() => { FindByCateogry('Laptop'); setPhone(false); setLaptop(true); setTablet(false); setFIlterParams({}) }}>Ноутбуки</span>
                 </div>
