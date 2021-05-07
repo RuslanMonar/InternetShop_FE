@@ -13,13 +13,13 @@ import { faSlidersH, faComment, faShoppingCart } from "@fortawesome/free-solid-s
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import Rodal from 'rodal';
-import StarRatings from 'react-star-ratings';
+import CartContext from './../../contexts/CartContext';
 import Cart from './../../modules/Cart/Cart';
 
 const Grid = () => {
 
     React.useEffect(() => {
-        //GetProductsList();
+        GetProductsList();
     }, [])
 
     const maxPriceDefault = 100000000000;
@@ -36,7 +36,8 @@ const Grid = () => {
     const [filterIcon, setFIlterIcon] = React.useState(false)
     const [ActiveLoader, setActiveLoader] = React.useState(false)
     const [PorductNotFound, setPorductNotFound] = React.useState(false)
-    const [cartModal, setCartModal] = React.useState(false)
+
+    const {cartModal , setCartModal} = React.useContext(CartContext)
 
 
 
@@ -209,15 +210,13 @@ const Grid = () => {
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
         api().post("/api/filter", data).then(result => {
-            console.log(result.data.products)
-            setActiveLoader(false);
             if (Object.keys(result.data.products).length > 0) {
                 setProductsParams(result)
             }
             else {
-                console.log()
                 setPorductNotFound(true);
             }
+            setActiveLoader(false);
         })
     }
 
@@ -280,51 +279,8 @@ const Grid = () => {
                 </div>
             </div>
             <div className={'productsContainer'}>
-                {/* {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)} */}
-                <div className={'productItem'}>
-                    <div className={'productItemImg'}>
-                        <img src="https://pcshop.ua/image/cache/catalog/tovar/1164420-1024x768.jpg" />
-                    </div>
-                    <div className={'productItemInfo'}>
-                        <span>Aple MacBook Pro  A23</span>
-                        <div className={'starRating'}>
-                            <StarRatings
-
-                                rating={4.3}
-                                starRatedColor="orange"
-                                numberOfStars={5}
-                                starDimension="15px"
-                                starSpacing="5px"
-                                starEmptyColor="gray"
-                                name='rating'
-                            />
-                            <span>4.3</span>
-                            <div className={'comments'}>
-                                <FontAwesomeIcon icon={faComment} size="xs" color="black" />
-                                <span>20</span>
-                            </div>
-                        </div>
-                        <div className={'buyBox'}>
-                            <span>51 550 ₴</span>
-                            <div onClick={() => setCartModal(!cartModal)} className={'shoppingCartIcon'}>
-                                <FontAwesomeIcon icon={faShoppingCart} size="lg" color="white" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}
             </div>
-
-            <Rodal
-                width={700}
-                height={500}
-                measure={'px'}
-                closeMaskOnClick={true}
-                visible={cartModal}
-                onClose={() => { setCartModal(!cartModal) }}
-                animation={'fade'}>
-                    
-                <Cart />
-            </Rodal>
 
             <Rodal width={400}
                 height={550}
@@ -336,7 +292,7 @@ const Grid = () => {
 
                 <div className={'PorductNotFound'}>
                     Товар за вказаними характеристиками не найдено
-                    </div>
+                </div>
             </Rodal>
         </div>
     )

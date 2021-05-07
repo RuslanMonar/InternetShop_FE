@@ -6,11 +6,52 @@ import { faShoppingCart, faComment } from "@fortawesome/free-solid-svg-icons";
 import StarRatings from 'react-star-ratings';
 
 
-const ProductItem = ({ product_name, price, rating, comments, front_image }) => {
+import AuthContext from './../../contexts/AuthContext';
+import CartContext from './../../contexts/CartContext';
+import api from './../../modules/Auth/ApiAxios';
+
+const ProductItem = ({ id, productable_type, productable_id, product_name, price, rating, comments, front_image }) => {
+    let total_price = price;
     price = price.toLocaleString()
     if (typeof rating === 'string' || rating instanceof String) {
         rating = parseFloat(rating)
     }
+
+    const { isLoggedIn, RegisterVisible, setRegisterVisible, } = React.useContext(AuthContext)
+    const { cartModal, setCartModal, setCartLoader, cart, setCart , loadCart , setCartTotalPrice } = React.useContext(CartContext)
+
+
+    const addToCart = () => {
+        if (isLoggedIn) {
+            setCartModal(!cartModal);
+            setCartLoader(true)
+            addToCartBackend();
+            loadCart(setCart , setCartLoader , setCartTotalPrice)
+        }
+        else {
+            setRegisterVisible(!RegisterVisible);
+        }
+    }
+
+    const addToCartBackend = () => {
+        let quantity = 1;
+        let data = { id, quantity, total_price }
+        api().get('/sanctum/csrf-cookie').then(response => {
+            api().post("/api/add-to-cart", data).then(result => {
+                console.log(result.data.cart);
+            })
+        });
+    }
+
+    // const loadCart = () => {
+    //     api().get('/sanctum/csrf-cookie').then(response => {
+    //         api().post("/api/load-cart").then(result => {
+    //             setCartLoader(false)
+    //             setCart(result.data.cart)
+    //             //console.log(result.data.cart);
+    //         })
+    //     });
+    // }
 
     return (
         <div className={'productItem'}>
@@ -37,7 +78,7 @@ const ProductItem = ({ product_name, price, rating, comments, front_image }) => 
                 </div>
                 <div className={'buyBox'}>
                     <span>{price} ₴</span>
-                    <div className={'shoppingCartIcon'}>
+                    <div onClick={() => addToCart()} className={'shoppingCartIcon'}>
                         <FontAwesomeIcon icon={faShoppingCart} size="lg" color="white" />
                     </div>
                 </div>

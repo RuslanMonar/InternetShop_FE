@@ -34,6 +34,9 @@
     height: 19px;
     cursor: pointer;
 }
+.cartItemImage{
+    margin-left: 20px;
+}
 .cartItemImage>img{    
     height: auto;
     width: 100px;
@@ -47,6 +50,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 75%;
+    margin-left: 25px;
 }
 .QuantityInput{
     display: flex;
