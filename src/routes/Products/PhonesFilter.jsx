@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../css/productsGrid.css'
 
-const PhonesFilter = ({ insertParam, filterByParams }) => {
+const PhonesFilter = ({ insertParam, filterByParams , higherPrice , lowerPrice }) => {
     return (
         <div className={'FilterCheckbox'}>
 
@@ -21,6 +21,7 @@ const PhonesFilter = ({ insertParam, filterByParams }) => {
                 <label> <input onChange={() => insertParam('screen_type', 'OLED')} type="checkbox" />OLED</label>
                 <label> <input onChange={() => insertParam('screen_type', 'AMOLED')} type="checkbox" />AMOLED</label>
                 <label> <input onChange={() => insertParam('screen_type', 'Super AMOLED')} type="checkbox" />Super AMOLED</label>
+                <label> <input onChange={() => insertParam('screen_type', 'Dynamic AMOLED 2X')} type="checkbox" />Dynamic AMOLED 2X</label>
                 <label> <input onChange={() => insertParam('screen_type', 'IPS')} type="checkbox" />IPS</label>
             </div>
 

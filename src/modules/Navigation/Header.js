@@ -7,6 +7,9 @@ import Login from '../Auth/Login';
 import { SignOut } from '../Auth/Auth';
 import AuthContext from '../../contexts/AuthContext';
 import SearchForm from '../search_form/SearchForm';
+import CartContext from './../../contexts/CartContext';
+import Cart from './../Cart/Cart';
+
 
 
 
@@ -23,7 +26,20 @@ const Header = () => {
         ToggleRegisterModal, ToggleLoginModal
     } = useContext(AuthContext);
 
+    const { setCart, setCartLoader, cartModal, setCartModal, loadCart, setCartTotalPrice , setProductsInCart , ProductsInCart } = React.useContext(CartContext)
+
     const AuthModalsSwitcher = { LoginVisible, setLoginVisible, RegisterVisible, setRegisterVisible, setLogged, isLoggedIn, setUserName }
+
+
+    const cartModalOpen = () => {
+        if (isLoggedIn) {
+            setCartModal(!cartModal);
+            loadCart(setCart, setCartLoader, setCartTotalPrice);
+        }
+        else{
+            setRegisterVisible(!RegisterVisible);
+        }
+    }
 
     return (
         <div className={classes.header}>
@@ -41,7 +57,7 @@ const Header = () => {
                                 <img src="/img/user.png" />
                                 <span>{UserName}</span>
                                 <img src="/img/exit.png" />
-                                <span onClick={() => SignOut(isLoggedIn, setLogged)} >Вихід</span>
+                                <span onClick={() => {SignOut(isLoggedIn, setLogged);setProductsInCart(0)}} >Вихід</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -54,8 +70,9 @@ const Header = () => {
                             </React.Fragment>
                         )}
                     </div >
-                    <div className={classes.basket}>
+                    <div onClick={() => cartModalOpen()} className={classes.basket}>
                         <img src="/img/basket.png" />
+                        <div  className={classes.ProductsInCart} >{ProductsInCart}</div>
                         <span>Корзина</span>
                     </div>
                 </div>
@@ -74,6 +91,20 @@ const Header = () => {
             <div className={classes.extra_info}>
                 <span>Бзкоштовна Доставка - Безкоштовне Повернення</span>
             </div>
+
+
+            <Rodal
+                width={700}
+                height={500}
+                measure={'px'}
+                closeMaskOnClick={true}
+                visible={cartModal}
+                onClose={() => { setCartModal(!cartModal) }}
+                animation={'fade'}>
+
+                <Cart />
+            </Rodal>
+
 
             <Rodal
                 width={400}

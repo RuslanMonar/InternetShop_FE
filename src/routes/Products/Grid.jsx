@@ -9,10 +9,12 @@ import LaptopFilter from './LaptopFilter';
 import TabletFilter from './TabletFilter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { } from '@fortawesome/free-brands-svg-icons'
-import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
+import { faSlidersH, faComment, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import Rodal from 'rodal';
+import CartContext from './../../contexts/CartContext';
+import Cart from './../../modules/Cart/Cart';
 
 const Grid = () => {
 
@@ -34,6 +36,8 @@ const Grid = () => {
     const [filterIcon, setFIlterIcon] = React.useState(false)
     const [ActiveLoader, setActiveLoader] = React.useState(false)
     const [PorductNotFound, setPorductNotFound] = React.useState(false)
+
+    const {cartModal , setCartModal} = React.useContext(CartContext)
 
 
 
@@ -206,15 +210,14 @@ const Grid = () => {
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
         api().post("/api/filter", data).then(result => {
-            console.log(result.data.products)
-            setActiveLoader(false);
             if (Object.keys(result.data.products).length > 0) {
-                setProductsParams(result)
+                // setProductsParams(result)
+                setProductList(result.data.products)
             }
             else {
-                console.log()
                 setPorductNotFound(true);
             }
+            setActiveLoader(false);
         })
     }
 
@@ -279,6 +282,7 @@ const Grid = () => {
             <div className={'productsContainer'}>
                 {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}
             </div>
+
             <Rodal width={400}
                 height={550}
                 measure={'px'}
@@ -289,7 +293,7 @@ const Grid = () => {
 
                 <div className={'PorductNotFound'}>
                     Товар за вказаними характеристиками не найдено
-                    </div>
+                </div>
             </Rodal>
         </div>
     )
