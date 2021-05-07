@@ -18,15 +18,16 @@ const ProductItem = ({ id, productable_type, productable_id, product_name, price
     }
 
     const { isLoggedIn, RegisterVisible, setRegisterVisible, } = React.useContext(AuthContext)
-    const { cartModal, setCartModal, setCartLoader, cart, setCart , loadCart , setCartTotalPrice } = React.useContext(CartContext)
+    const { cartModal, setCartModal, setCartLoader, cart, setCart , loadCart , setCartTotalPrice , CountProductInCart , setProductsInCart } = React.useContext(CartContext)
 
 
     const addToCart = () => {
         if (isLoggedIn) {
             setCartModal(!cartModal);
-            setCartLoader(true)
+            setCartLoader(true);
             addToCartBackend();
-            loadCart(setCart , setCartLoader , setCartTotalPrice)
+            CountProductInCart(setProductsInCart);
+            loadCart(setCart , setCartLoader , setCartTotalPrice);
         }
         else {
             setRegisterVisible(!RegisterVisible);
@@ -38,7 +39,6 @@ const ProductItem = ({ id, productable_type, productable_id, product_name, price
         let data = { id, quantity, total_price }
         api().get('/sanctum/csrf-cookie').then(response => {
             api().post("/api/add-to-cart", data).then(result => {
-                console.log(result.data.cart);
             })
         });
     }
