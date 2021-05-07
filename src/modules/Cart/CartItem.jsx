@@ -7,9 +7,9 @@ import React from 'react';
 
 const CartItem = ({ id, quantity, total_price, products }) => {
 
-    const { delteItemFromCart, setCart, setCartLoader, setCartTotalPrice, IncreaseQuantity, DecreaseQuantity, ChangeQuantityValue } = React.useContext(CartContext)
+    const { delteItemFromCart, setCart, setCartLoader, setCartTotalPrice, IncreaseQuantity, DecreaseQuantity, ChangeQuantityValue , setProductsInCart} = React.useContext(CartContext)
 
-    const CartFunctions = { setCart, setCartLoader, setCartTotalPrice }
+    const CartFunctions = { setCart, setCartLoader, setCartTotalPrice , setProductsInCart }
     const [localQuanity, setLocalQuantity] = React.useState(quantity);
     const [listener, setListener] = React.useState(false);
     const [CartFirstLoad, setCartFirstLoad] = React.useState(true);

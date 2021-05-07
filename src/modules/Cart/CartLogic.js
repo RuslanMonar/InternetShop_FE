@@ -24,6 +24,7 @@ export const delteItemFromCart = (id , CartFunctions) => {
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/delete-from-cart" , data).then(result => {
             loadCart(CartFunctions.setCart , CartFunctions.setCartLoader , CartFunctions.setCartTotalPrice);
+            CountProductInCart(CartFunctions.setProductsInCart)
         })
     });
 }
@@ -34,6 +35,7 @@ export const IncreaseQuantity = (id , CartFunctions) => {
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/increase-quantity" , data).then(result => {
             loadCart(CartFunctions.setCart , CartFunctions.setCartLoader , CartFunctions.setCartTotalPrice);
+            CountProductInCart(CartFunctions.setProductsInCart)
         })
     });
 }
@@ -44,6 +46,7 @@ export const DecreaseQuantity = (id , CartFunctions) => {
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/decrease-quantity" , data).then(result => {
             loadCart(CartFunctions.setCart , CartFunctions.setCartLoader , CartFunctions.setCartTotalPrice);
+            CountProductInCart(CartFunctions.setProductsInCart)
         })
     });
 }
@@ -54,7 +57,7 @@ export const ChangeQuantityValue = (id , quantity , CartFunctions) => {
     api().get('/sanctum/csrf-cookie').then(response => {
         api().post("/api/change-quantity-value" , data).then(result => {
             loadCart(CartFunctions.setCart , CartFunctions.setCartLoader , CartFunctions.setCartTotalPrice);
-            
+            CountProductInCart(CartFunctions.setProductsInCart)
         })
     });
 }

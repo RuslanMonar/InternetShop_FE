@@ -51,7 +51,7 @@ function App() {
           loadCart, delteItemFromCart,
           cartTotalPrice, setCartTotalPrice,
           IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue,
-          ProductsInCart
+          ProductsInCart , setProductsInCart
         }} >
           <Route path="/" exact component={Home} />
           <Route path="/products" exact component={Main} />
