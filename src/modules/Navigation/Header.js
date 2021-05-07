@@ -26,7 +26,7 @@ const Header = () => {
         ToggleRegisterModal, ToggleLoginModal
     } = useContext(AuthContext);
 
-    const { setCart, setCartLoader, cartModal, setCartModal, loadCart, setCartTotalPrice , ProductsInCart } = React.useContext(CartContext)
+    const { setCart, setCartLoader, cartModal, setCartModal, loadCart, setCartTotalPrice , setProductsInCart , ProductsInCart } = React.useContext(CartContext)
 
     const AuthModalsSwitcher = { LoginVisible, setLoginVisible, RegisterVisible, setRegisterVisible, setLogged, isLoggedIn, setUserName }
 
@@ -57,7 +57,7 @@ const Header = () => {
                                 <img src="/img/user.png" />
                                 <span>{UserName}</span>
                                 <img src="/img/exit.png" />
-                                <span onClick={() => SignOut(isLoggedIn, setLogged)} >Вихід</span>
+                                <span onClick={() => {SignOut(isLoggedIn, setLogged);setProductsInCart(0)}} >Вихід</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>

@@ -26,6 +26,7 @@ export const SignIn = (email, password, modalFunc, LoginAfterRegistration = fals
             if (result.status === 200) {
                 SetAuthCookie()
                 modalFunc.SetAlertMistake(false)
+                modalFunc.CountProductInCart(modalFunc.setProductsInCart)
                 modalFunc.WhenSignIn(result.data.name, modalFunc.AuthModalsSwitcher, LoginAfterRegistration)
             }
         }).catch(err => {

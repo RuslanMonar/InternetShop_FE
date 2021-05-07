@@ -4,6 +4,7 @@ import { SignIn, GoogleSignInResponse, FacebookSignInResponse } from './Auth';
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import AuthContext from './../../contexts/AuthContext';
+import CartContext from './../../contexts/CartContext';
 
 
 
@@ -12,7 +13,8 @@ const Login = ({ AuthModalsSwitcher }) => {
     const [password, setPassword] = React.useState("")
 
     const { AlertMistake, ToggleAuthModals, SetAlertMistake, WhenSignIn } = React.useContext(AuthContext);
-    const modalFunc = { SetAlertMistake, WhenSignIn, AuthModalsSwitcher }
+    const { CountProductInCart , setProductsInCart} = React.useContext(CartContext);
+    const modalFunc = { SetAlertMistake, WhenSignIn, AuthModalsSwitcher ,  CountProductInCart , setProductsInCart }
 
 
     return (
