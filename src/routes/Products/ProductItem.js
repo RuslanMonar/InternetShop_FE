@@ -43,16 +43,6 @@ const ProductItem = ({ id, productable_type, productable_id, product_name, price
         });
     }
 
-    // const loadCart = () => {
-    //     api().get('/sanctum/csrf-cookie').then(response => {
-    //         api().post("/api/load-cart").then(result => {
-    //             setCartLoader(false)
-    //             setCart(result.data.cart)
-    //             //console.log(result.data.cart);
-    //         })
-    //     });
-    // }
-
     return (
         <div className={'productItem'}>
             <div className={'productItemImg'} >

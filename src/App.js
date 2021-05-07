@@ -9,15 +9,20 @@ import AboutUsMain from './routes/AboutUs/AboutMain';
 import { NetworkError, Error_500, Error_502, Error_404, Error_401 } from './modules/Errors/Errors';
 import { ToggleLoginModal, ToggleRegisterModal, ToggleAuthModals, Username, WhenSignIn } from './modules/Auth/ToggleAuthModals'
 import CartContext from './contexts/CartContext';
-import { loadCart, delteItemFromCart , IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue } from './modules/Cart/CartLogic';
+import { loadCart, delteItemFromCart , IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue , CountProductInCart } from './modules/Cart/CartLogic';
 
 
 function App() {
 
   const [isLoggedIn, setLogged] = React.useState(CheckAuthCookie);
   const [UserName, setUserName] = React.useState('');
+  const [ProductsInCart , setProductsInCart] = React.useState(0);
   React.useEffect(() => {
-    if (isLoggedIn) { Username(setUserName); }
+    if (isLoggedIn) { 
+      Username(setUserName); 
+      CountProductInCart(setProductsInCart);
+      console.log(ProductsInCart);
+    }
   }, [])
   const [RegisterVisible, setRegisterVisible] = React.useState(false);
   const [LoginVisible, setLoginVisible] = React.useState(false);
@@ -45,7 +50,8 @@ function App() {
           cart, setCart,
           loadCart, delteItemFromCart,
           cartTotalPrice, setCartTotalPrice,
-          IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue
+          IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue,
+          ProductsInCart
         }} >
           <Route path="/" exact component={Home} />
           <Route path="/products" exact component={Main} />

@@ -211,7 +211,8 @@ const Grid = () => {
         let data = { filterParams, type }
         api().post("/api/filter", data).then(result => {
             if (Object.keys(result.data.products).length > 0) {
-                setProductsParams(result)
+                // setProductsParams(result)
+                setProductList(result.data.products)
             }
             else {
                 setPorductNotFound(true);

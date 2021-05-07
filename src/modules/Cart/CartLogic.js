@@ -58,3 +58,11 @@ export const ChangeQuantityValue = (id , quantity , CartFunctions) => {
         })
     });
 }
+
+export const CountProductInCart = (setProductsInCart) => {
+    api().get('/sanctum/csrf-cookie').then(response => {
+        api().post("/api/count-products-in-cart").then(result => {
+            setProductsInCart(result.data.quantity);
+        })
+    });
+}

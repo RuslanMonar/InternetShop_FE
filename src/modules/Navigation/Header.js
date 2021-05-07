@@ -26,7 +26,7 @@ const Header = () => {
         ToggleRegisterModal, ToggleLoginModal
     } = useContext(AuthContext);
 
-    const { setCart, setCartLoader, cartModal, setCartModal, loadCart, setCartTotalPrice } = React.useContext(CartContext)
+    const { setCart, setCartLoader, cartModal, setCartModal, loadCart, setCartTotalPrice , ProductsInCart } = React.useContext(CartContext)
 
     const AuthModalsSwitcher = { LoginVisible, setLoginVisible, RegisterVisible, setRegisterVisible, setLogged, isLoggedIn, setUserName }
 
@@ -72,6 +72,7 @@ const Header = () => {
                     </div >
                     <div onClick={() => cartModalOpen()} className={classes.basket}>
                         <img src="/img/basket.png" />
+                        <div  className={classes.ProductsInCart} >{ProductsInCart}</div>
                         <span>Корзина</span>
                     </div>
                 </div>
