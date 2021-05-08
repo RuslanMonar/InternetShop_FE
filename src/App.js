@@ -20,8 +20,8 @@ function App() {
   const [ProductsInCart , setProductsInCart] = React.useState(0);
   React.useEffect(() => {
     if (isLoggedIn) { 
-      // Username(setUserName); 
-      // CountProductInCart(setProductsInCart);
+      Username(setUserName); 
+      CountProductInCart(setProductsInCart);
     }
   }, [])
   const [RegisterVisible, setRegisterVisible] = React.useState(false);
