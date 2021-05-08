@@ -10,6 +10,7 @@ import { NetworkError, Error_500, Error_502, Error_404, Error_401 } from './modu
 import { ToggleLoginModal, ToggleRegisterModal, ToggleAuthModals, Username, WhenSignIn } from './modules/Auth/ToggleAuthModals'
 import CartContext from './contexts/CartContext';
 import { loadCart, delteItemFromCart , IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue , CountProductInCart } from './modules/Cart/CartLogic';
+import MainFAQ from './routes/FAQ/FAQMain';
 
 
 function App() {
@@ -21,7 +22,6 @@ function App() {
     if (isLoggedIn) { 
       Username(setUserName); 
       CountProductInCart(setProductsInCart);
-      console.log(ProductsInCart);
     }
   }, [])
   const [RegisterVisible, setRegisterVisible] = React.useState(false);
@@ -60,6 +60,7 @@ function App() {
           <Route path="/502" exact component={Error_502} />
           <Route path="/404" exact component={Error_404} />
           <Route path="/401" exact component={Error_401} />
+          <Route path="/faq" exact component={MainFAQ} />
           <Route path="/network_error" exact component={NetworkError} />
         </CartContext.Provider>
       </AuthContext.Provider>
