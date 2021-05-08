@@ -82,7 +82,7 @@ const Header = () => {
                 <ul className={responsiveMenu === true ? classes.myListResponsive : classes.menuList}>
                     <li><Link to="/products">Каталог товарів</Link></li>
                     <li><Link to="/about">Про нас</Link></li>
-                    <li>LEBNSMITTEL</li>
+                    <li><Link to="/faq">Відповіді на запитання</Link></li>
                     <li>MASCHINENBAU</li>
                     <li>LANDINGPAGE</li>
                     <li>SALE</li>
