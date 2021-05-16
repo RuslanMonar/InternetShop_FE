@@ -31,7 +31,9 @@ function App() {
   const [CartLoader, setCartLoader] = React.useState(false)
   const [cart, setCart] = React.useState();
   const [cartTotalPrice, setCartTotalPrice] = React.useState(0);
-
+  const [ProductsList, setProductList] = React.useState();
+  const [data, setData] = React.useState();
+  const [ActiveLoader, setActiveLoader] = React.useState(false)
 
   return (
     <Switch>
@@ -51,7 +53,10 @@ function App() {
           loadCart, delteItemFromCart,
           cartTotalPrice, setCartTotalPrice,
           IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue,
-          ProductsInCart , setProductsInCart , CountProductInCart
+          ProductsInCart , setProductsInCart , CountProductInCart,
+          ProductsList , setProductList,
+          data , setData,
+          ActiveLoader, setActiveLoader
         }} >
           <Route path="/" exact component={Home} />
           <Route path="/products" exact component={Main} />

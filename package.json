@@ -19,6 +19,7 @@
     "react-google-login": "^5.2.2",
     "react-google-oauth": "^1.0.0",
     "react-input-range": "^1.3.0",
+    "react-laravel-paginex": "^2.0.8",
     "react-loader-spinner": "^4.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
