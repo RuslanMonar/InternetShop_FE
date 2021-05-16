@@ -242,7 +242,7 @@ const Grid = () => {
         insertParam('higher_price', higherPrice.max)
         let data = { filterParams, type }
         api().post("/api/filter", data).then(result => {
-            if (Object.keys(result.data.products).length > 0) {
+            if (Object.keys(result.data.products.data).length > 0) {
                 // setProductsParams(result)
                 setProductList(result.data.products.data)
                 setData({ data: result.data.products })
