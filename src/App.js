@@ -11,6 +11,7 @@ import { ToggleLoginModal, ToggleRegisterModal, ToggleAuthModals, Username, When
 import CartContext from './contexts/CartContext';
 import { loadCart, delteItemFromCart , IncreaseQuantity , DecreaseQuantity , ChangeQuantityValue , CountProductInCart } from './modules/Cart/CartLogic';
 import MainFAQ from './routes/FAQ/FAQMain';
+import ProductDetails from './routes/Products/ProductDetails';
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
           <Route path="/404" exact component={Error_404} />
           <Route path="/401" exact component={Error_401} />
           <Route path="/faq" exact component={MainFAQ} />
+          <Route path="/product-item/" component={ProductDetails} / >
           <Route path="/network_error" exact component={NetworkError} />
         </CartContext.Provider>
       </AuthContext.Provider>

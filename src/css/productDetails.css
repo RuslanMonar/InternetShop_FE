@@ -1,0 +1,219 @@
+
+.inner_line{
+    margin-top: 50px;
+    font-size:18px;
+    font-weight: 500;
+    padding-left: 34%;
+    display: flex;
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 15px;
+}
+.container{
+  
+    margin-right: 10%;
+    margin-left: 14%;
+
+   
+}
+.elements_of_inner::after{
+margin-left: 5px;
+content: '/';
+margin-right: 5px;
+
+}
+.ProductImage{
+    width: 40%;
+  
+}
+
+.ProductImage img{
+    border-radius: 3px;
+    width: 100%;
+    height: 250px;
+    
+   
+
+}
+.ProductCart{
+    display: flex;
+    margin-top: 0px;
+    justify-content:space-between;
+    
+}
+.ProductDetail{
+    
+width: 55%;
+ 
+}
+.ProductTitle{
+    margin-top: 45px;
+    font-size: 25px;
+    font-weight:700;
+    text-align: left;
+    width: 80%;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+    
+}
+.ProductPrice{
+    font-size: 25px;
+    font-weight:700;
+    letter-spacing: 1.5px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.Buyproduct{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+}
+.ProductBuyButtons{
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.BuyButtonPaypal{
+    width: 40%;
+    color: black;
+    background-color: yellow;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    display:flex;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-radius: 5px;
+    letter-spacing: 1.5px;
+}
+.BuyButtonBasket{
+    width: 55%;
+    letter-spacing: 1.5px;
+    color: white;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: black;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    padding-right: 10%;
+    padding-left: 5%;
+    border-radius: 5px;
+}
+.ProducttextbasketImage{
+
+    margin-top: 5px;
+    height: 17px;
+    width: 20px;
+    margin-right: 10px;
+   
+}
+.BuyButtonBasket:hover{
+    cursor: pointer;
+}
+.BuyButtonPaypal:hover{
+    cursor: pointer;
+}
+.BuyButtonPaypal img{
+    margin-left: 10px;
+    width: 40px;
+    height: 30px;
+}
+.ProductComunication{
+    margin-top: 25px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 35px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid lightgray;
+    
+}
+
+.FirstELement{
+    margin-bottom: 20px;
+    color: lightgreen;
+    
+}
+.NumberPhone{
+    margin-left: 0;
+    color: black;
+}
+.ComunicationIcon{
+    margin-bottom: -6px;
+    width: 25px;
+    height: 25px;
+    margin-right: 6px;
+}
+
+.DetailsTitle{
+    font-size: 25px;
+    font-weight: 600;
+    margin-left: 1%;
+    margin-bottom: 20px;
+}
+.DetailsItem{
+    
+    padding-top: 20px;
+    padding-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-bottom: 2px solid lightgray;
+    margin-bottom: 20px;
+}
+.DetailsPart{
+    border-top: 2px solid lightgray;
+    padding-right:10%;
+    padding-left: 2%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    text-transform: none;
+}
+.DetailParametr{
+    margin-right: 40%;
+}
+.FirstSlider{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #F0EFEF;
+    padding-top: 20px;
+}
+.LowerImageConteiner{
+    width: 25%;
+    height: 100px;
+   padding-left: 5%;
+   cursor: pointer;
+   
+
+}
+.LowerImageConteiner img{
+    width: 100%;
+    height: 100px;
+    border-radius: 3px;
+    
+}
+
+
+.SecondSlider{
+    text-align: center;
+}
+.slick-active+.slick-active {
+    opacity: 0.3;
+  }
+.slick-active{
+    opacity: 1
+    
+}
+.slick-active+.slick-active+.slick-active{
+    opacity: 0.3;
+}
+.TextAboutItem{
+    margin-top: 20px;
+}
