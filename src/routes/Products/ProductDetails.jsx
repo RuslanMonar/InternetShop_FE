@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import  '../../../src/css/productDetails.css';
+import '../../../src/css/productDetails.css';
 import Slider from 'react-slick';
 
 import "slick-carousel/slick/slick.css";
+import api from './../../modules/Auth/ApiAxios';
 
 
 function Detaills(props) {
@@ -38,6 +39,9 @@ const ProductDetails = ({ id }) => {
     const [card, setCard] = useState({});
     const [nav1, setNav1] = useState();
     const [nav2, setNav2] = useState();
+
+    const [images , setImages] = React.useState([])
+
     const loadItem = () => {
         fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
             .then((response) => response.json())
@@ -54,9 +58,16 @@ const ProductDetails = ({ id }) => {
 
     }
 
+    const GetDetails = (id) => {
+        let data = {id}
+        api().post("/api/product-details" , data).then(result => {
+            setImages(result.data.productDetails);
+        })
+    }
+
 
     useEffect(() => {
-        loadItem()
+        GetDetails(4)
     }, [])
 
     var item = {
@@ -66,7 +77,7 @@ const ProductDetails = ({ id }) => {
 
     return (
         <div className="container">
-
+            <button onClick={() => GetDetails(1)}> Load product data </button>
             <div className="inner_line">
                 <p className="elements_of_inner">Головна</p>
                 <p className="elements_of_inner">Каталог товарів</p>
@@ -80,16 +91,20 @@ const ProductDetails = ({ id }) => {
                     <Slider className="FirstSlider" asNavFor={nav2}
                         infinite={true}
                         arrows={false}
-                        lazyLoad={true}
-                        fade={true}
+                        lazyLoad={false}
+                        fade={false}
                         speed={0}
-                        ref={(slider1) => setNav1(slider1)}>
-                        <div className="Imageconteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2018/11/26/978705/sm.intro.800.jpg"></img></div>
-                        <div className="Imageconteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2021/01/12/1029889/0.jpg"></img></div>
-                        <div className="Imageconteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2020/08/24/1018925/intro.jpg"></img></div>
-                        <div className="Imageconteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2018/11/26/978705/sm.intro.800.jpg"></img></div>
-                        <div className="Imageconteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2021/01/12/1029889/0.jpg"></img></div>
-                        <div className="Imageconteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2020/08/24/1018925/intro.jpg"></img></div>
+                        ref={(slider1) => setNav1(slider1)}
+                        >
+
+                        {
+                            images.map(item => {
+                                console.log(item.path_image);
+                                return (
+                                    <div className="MainImage"> <img src={item.path_image}></img></div>
+                                )
+                            })
+                        }
 
                     </Slider>
                     <Slider className="SecondSlider"
@@ -98,22 +113,25 @@ const ProductDetails = ({ id }) => {
                         ref={(slider2) => setNav2(slider2)}
                         speed={10}
 
-                        lazyLoad={true}
-                        infinite={true}
+                        lazyLoad={false}
+                        infinite={false}
 
                         focusOnSelect={true}
                         slidesToShow={3}
                     >
-                        <div className="LowerImageConteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2018/11/26/978705/sm.intro.800.jpg"></img></div>
-                        <div className="LowerImageConteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2021/01/12/1029889/0.jpg"></img></div>
-                        <div className="LowerImageConteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2020/08/24/1018925/intro.jpg"></img></div>
-                        <div className="LowerImageConteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2018/11/26/978705/sm.intro.800.jpg"></img></div>
-                        <div className="LowerImageConteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2021/01/12/1029889/0.jpg"></img></div>
-                        <div className="LowerImageConteiner"> <img src="https://3dnews.ru/assets/external/illustrations/2020/08/24/1018925/intro.jpg"></img></div>
-
+                        {
+                            images.map(item => {
+                                console.log(item.path_image);
+                                return (
+                                    <div className="Imageconteiner"> <img src={item.path_image}></img></div>
+                                )
+                            })
+                        }
                     </Slider>
 
-                    <p className="TextAboutItem">Працюйте, вчіться або грайте день у день з потужним і тонким ноутбуком Redmibook 14". У нього є все необхідне, щоб стати вашим незамінним помічником. Завдяки продуктивній начинці цей портативний лептоп легко справляється з будь-якими повсякденними завданнями, а яскравий 14-дюймовий екран з роздільною здатністю Full HD і стереодинаміки з підтримкою DTS просто створені для мультимедійних розваг. І все це упаковано у витончений металевий корпус, який виглядає дуже стильно.</p>
+                    <p className="TextAboutItem">
+
+                    </p>
 
                 </div>
                 <div className="ProductDetail">
