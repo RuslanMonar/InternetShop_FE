@@ -10,7 +10,8 @@
     margin-top: 50px;
     font-size:18px;
     font-weight: 500;
-    padding-left: 34%;
+    padding-left: 13%;
+    padding-right: 10%;
     display: flex;
     border-bottom: 2px solid lightgray;
     padding-bottom: 15px;
@@ -24,6 +25,7 @@
 }
 .elements_of_inner::after{
 margin-left: 5px;
+
 content: '/';
 margin-right: 5px;
 
@@ -143,7 +145,7 @@ width: 55%;
 
 .FirstELement{
     margin-bottom: 20px;
-    color: lightgreen;
+   
     
 }
 .NumberPhone{
@@ -180,11 +182,11 @@ width: 55%;
     padding-top: 10px;
     padding-bottom: 10px;
     display: flex;
+    justify-content: space-between;
+    
     text-transform: none;
 }
-.DetailParametr{
-    margin-right: 40%;
-}
+
 .FirstSlider{
     margin-top: 50px;
     margin-bottom: 30px;
