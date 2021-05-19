@@ -177,6 +177,7 @@ const Grid = () => {
             setAll(false);
             setIsFilter(false);
             setActiveLoader(false);
+            window.scrollTo(0, 0);
         })
     }
     const FindByCateogryPagination = (categoryName, pagination) => {
@@ -186,6 +187,7 @@ const Grid = () => {
         api().post('/api/category?page=' + pagination.page, data).then(result => {
             setProductsParams(result)
             setActiveLoader(false);
+            window.scrollTo(0, 0);
         })
     }
 
@@ -199,6 +201,7 @@ const Grid = () => {
         setMinPrice(price.lowerPrice)
         setHigherPrice({ max: price.higherPrice })
         setLowerPrice({ min: price.lowerPrice })
+        window.scrollTo(0, 0);
     }
 
     const insertParam = (key, value, searchType = null) => {
@@ -246,6 +249,7 @@ const Grid = () => {
                 // setProductsParams(result)
                 setProductList(result.data.products.data)
                 setData({ data: result.data.products })
+                window.scrollTo(0, 0);
             }
             else {
                 setPorductNotFound(true);
@@ -267,6 +271,7 @@ const Grid = () => {
                 // setProductsParams(result)
                 setProductList(result.data.products.data)
                 setData({ data: result.data.products })
+                window.scrollTo(0, 0);
             }
             else {
                 setPorductNotFound(true);

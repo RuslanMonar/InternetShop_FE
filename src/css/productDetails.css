@@ -1,17 +1,14 @@
 .inner_line {
-    margin-top: 50px;
     font-size: 16px;
+    margin-left: 5%;
     display: flex;
     border-bottom: 0.5px solid #d6d6d6;
     color: #616161;
 }
 
 .container {
-
     margin-right: 10%;
     margin-left: 14%;
-
-
 }
 
 .elements_of_inner::after {
@@ -22,8 +19,8 @@
 }
 
 .ProductImage {
-    width: 40%;
-
+    width: 50%;
+    margin-left: 5%;
 }
 
 .Imageconteiner img {
@@ -95,16 +92,40 @@
     display: flex;
     justify-content: space-between;
 }
-.loaderSpinerProductDetails{
+
+.loaderSpinerProductDetails {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.8);
-    width: 60%;
-    height: 300%;
+    width: 85%;
+    height: 400%;
     z-index: 1000;
     display: flex;
     justify-content: center;
     padding: 7%;
 }
+.loaderSpinerProductDetails>svg{
+    position: fixed;
+}
+.RecomendedProducts {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.RecomendedProducts>div {
+    border: 1px solid #cfcfcf;
+    width: 16%;
+}
+
+.recomendTitle {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-left: 5%;
+    font-weight: bold;
+    font-size: 22px;
+}
+
 .BuyButtonPaypal {
     width: 40%;
     color: black;
@@ -155,6 +176,11 @@
     height: 30px;
 }
 
+.TextAboutItem>img {
+    width: 95%;
+    margin-bottom: -4px;
+}
+
 .ProductComunication {
     margin-top: 25px;
     font-size: 15px;
@@ -165,9 +191,11 @@
     border-bottom: 0.5px solid #d6d6d6;
 
 }
-.ProductComunicationSecondRow{
+
+.ProductComunicationSecondRow {
     margin-left: 50px;
 }
+
 .FirstELement {
     margin-bottom: 20px;
     color: #0a9a0a;
@@ -215,7 +243,7 @@
 
 .FirstSlider {
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .LowerImageConteiner {
@@ -233,7 +261,8 @@
     border-radius: 3px;
 
 }
-.AttributesType{
+
+.AttributesType {
     font-size: 14px;
     font-weight: 700;
     color: #303030;
@@ -243,8 +272,18 @@
 }
 
 .SecondSlider {
-    text-align: center;
+    width: 50%;
 }
+
+.centerSecondSlider {
+    width: initial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+
 
 .slick-active+.slick-active {
     opacity: 0.3;

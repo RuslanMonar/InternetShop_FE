@@ -68,7 +68,7 @@ function App() {
           <Route path="/404" exact component={Error_404} />
           <Route path="/401" exact component={Error_401} />
           <Route path="/faq" exact component={MainFAQ} />
-          <Route path="/product-item/" component={CurrentProduct} / >
+          <Route path="/product-item/:id"  render= {routeProps =><CurrentProduct {...routeProps} key={document.location.href} />} / >
           <Route path="/network_error" exact component={NetworkError} />
         </CartContext.Provider>
       </AuthContext.Provider>

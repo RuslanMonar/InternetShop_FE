@@ -44,11 +44,12 @@ const ProductItem = ({ id, productable_type, productable_id, product_name, price
     }
 
     const newTo = {
-        pathname: "/product-item",
+        pathname: "/product-item/"+id,
         state: {
             id,
             productable_type,
-            productable_id
+            productable_id,
+            total_price
         }
     };
 
