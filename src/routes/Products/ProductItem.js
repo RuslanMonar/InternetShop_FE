@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { } from '@fortawesome/free-brands-svg-icons'
 import { faShoppingCart, faComment } from "@fortawesome/free-solid-svg-icons";
 import StarRatings from 'react-star-ratings';
-
+import { Link } from 'react-router-dom';
 
 import AuthContext from './../../contexts/AuthContext';
 import CartContext from './../../contexts/CartContext';
@@ -18,7 +18,7 @@ const ProductItem = ({ id, productable_type, productable_id, product_name, price
     }
 
     const { isLoggedIn, RegisterVisible, setRegisterVisible, } = React.useContext(AuthContext)
-    const { cartModal, setCartModal, setCartLoader, cart, setCart , loadCart , setCartTotalPrice , CountProductInCart , setProductsInCart } = React.useContext(CartContext)
+    const { cartModal, setCartModal, setCartLoader, cart, setCart, loadCart, setCartTotalPrice, CountProductInCart, setProductsInCart } = React.useContext(CartContext)
 
 
     const addToCart = () => {
@@ -27,7 +27,7 @@ const ProductItem = ({ id, productable_type, productable_id, product_name, price
             setCartLoader(true);
             addToCartBackend();
             CountProductInCart(setProductsInCart);
-            loadCart(setCart , setCartLoader , setCartTotalPrice);
+            loadCart(setCart, setCartLoader, setCartTotalPrice);
         }
         else {
             setRegisterVisible(!RegisterVisible);
@@ -43,13 +43,23 @@ const ProductItem = ({ id, productable_type, productable_id, product_name, price
         });
     }
 
+    const newTo = {
+        pathname: "/product-item/"+id,
+        state: {
+            id,
+            productable_type,
+            productable_id,
+            total_price
+        }
+    };
+
     return (
         <div className={'productItem'}>
             <div className={'productItemImg'} >
                 <img src={front_image} />
             </div>
             <div className={'productItemInfo'}>
-                <span>{product_name}</span>
+                <Link to={newTo}><span>{product_name}</span></Link>
                 <div className={'starRating'}>
                     <StarRatings
                         rating={rating}

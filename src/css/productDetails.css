@@ -1,0 +1,302 @@
+.inner_line {
+    font-size: 16px;
+    margin-left: 5%;
+    display: flex;
+    border-bottom: 0.5px solid #d6d6d6;
+    color: #616161;
+}
+
+.container {
+    margin-right: 10%;
+    margin-left: 14%;
+}
+
+.elements_of_inner::after {
+    margin-left: 5px;
+    content: '/';
+    margin-right: 5px;
+
+}
+
+.ProductImage {
+    width: 50%;
+    margin-left: 5%;
+}
+
+.Imageconteiner img {
+    float: left;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.MainImage>img {
+    float: left;
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+}
+
+.ProductCart {
+    display: flex;
+    margin-top: 0px;
+    justify-content: space-between;
+
+}
+
+.ProductDetail {
+    width: 55%;
+}
+
+.ProductTitle {
+    margin-top: 45px;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: left;
+    width: 80%;
+    margin-bottom: 35px;
+}
+
+.ProductPrice {
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.Buyproduct {
+    padding-bottom: 15px;
+    border-top: 0.5px solid #d6d6d6;
+    border-bottom: 0.5px solid #d6d6d6;
+}
+
+.ProductRatingDetails {
+    display: flex;
+    align-items: center;
+}
+
+.ProductRatingDetails>p {
+    margin-right: 20px;
+}
+
+.rating_digit {
+    margin-left: 10px;
+    color: #afafaf;
+    font-size: 14px;
+}
+
+.rating_name {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.ProductBuyButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.loaderSpinerProductDetails {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 85%;
+    height: 400%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 7%;
+}
+.loaderSpinerProductDetails>svg{
+    position: fixed;
+}
+.RecomendedProducts {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.RecomendedProducts>div {
+    border: 1px solid #cfcfcf;
+    width: 16%;
+}
+
+.recomendTitle {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-left: 5%;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.BuyButtonPaypal {
+    width: 40%;
+    color: black;
+    background-color: yellow;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-radius: 5px;
+    letter-spacing: 1.5px;
+}
+
+.BuyButtonBasket {
+    display: flex;
+    background-color: #e31837;
+    color: white;
+    padding: 5px 20px 5px 20px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-weight: bold;
+
+}
+
+.ProducttextbasketImage {
+    height: 17px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.Producttextbasket {
+    margin: 0;
+}
+
+.BuyButtonBasket:hover {
+    cursor: pointer;
+}
+
+.BuyButtonPaypal:hover {
+    cursor: pointer;
+}
+
+.BuyButtonPaypal img {
+    margin-left: 10px;
+    width: 40px;
+    height: 30px;
+}
+
+.TextAboutItem>img {
+    width: 95%;
+    margin-bottom: -4px;
+}
+
+.ProductComunication {
+    margin-top: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    padding-bottom: 35px;
+    margin-bottom: 20px;
+    border-bottom: 0.5px solid #d6d6d6;
+
+}
+
+.ProductComunicationSecondRow {
+    margin-left: 50px;
+}
+
+.FirstELement {
+    margin-bottom: 20px;
+    color: #0a9a0a;
+
+}
+
+.NumberPhone {
+    margin-left: 0;
+    color: black;
+}
+
+.ComunicationIcon {
+    margin-bottom: -6px;
+    width: 25px;
+    height: 25px;
+    margin-right: 6px;
+}
+
+.DetailsTitle {
+    font-size: 25px;
+    font-weight: 600;
+    margin-left: 1%;
+    margin-bottom: 20px;
+}
+
+.DetailsItem {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.DetailsPart {
+    border-top: 0.5px solid #d6d6d6;
+    padding-right: 10%;
+    padding-left: 2%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    text-transform: none;
+}
+
+.DetailParametr {
+    width: 60%;
+}
+
+.FirstSlider {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.LowerImageConteiner {
+    width: 25%;
+    height: 100px;
+    padding-left: 5%;
+    cursor: pointer;
+
+
+}
+
+.LowerImageConteiner img {
+    width: 100%;
+    height: 100px;
+    border-radius: 3px;
+
+}
+
+.AttributesType {
+    font-size: 14px;
+    font-weight: 700;
+    color: #303030;
+    padding-left: 2%;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.SecondSlider {
+    width: 50%;
+}
+
+.centerSecondSlider {
+    width: initial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+
+
+.slick-active+.slick-active {
+    opacity: 0.3;
+}
+
+.slick-active {
+    opacity: 1
+}
+
+.slick-active+.slick-active+.slick-active {
+    opacity: 0.3;
+}
+
+.TextAboutItem {
+    margin-top: 20px;
+}
