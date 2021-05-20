@@ -159,18 +159,18 @@
 }
 
 .input-range {
-    height: fit-content;
-    width: 70%;
-    margin-left: 10%;
+    height: fit-content !important;
+    width: 70% !important;
+    margin-left: 10% !important;
     background: grey;
-    margin-top: 30px;
+    margin-top: 30px !important;
 }
 
 .input-range-field {
-    display: flex;
-    justify-content: space-around;
-    width: 90%;
-    margin-top: 20px;
+    display: flex !important;
+    justify-content: space-around !important;
+    width: 90% !important;
+    margin-top: 20px !important;
 }
 
 .filterPriceInput {
@@ -196,38 +196,38 @@ input[type='number'] {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    -webkit-appearance: none !important;
 }
 
 .input-range__label--value {
-    display: none;
+    display: none !important;
 }
 
 .input-range__track {
-    background: #dddddd;
+    background: #dddddd !important;
 }
 
 .input-range__track--active {
-    background-color: black;
+    background-color: black !important;
 }
 
 .input-range__slider {
-    background-color: black;
+    background-color: black !important;
 }
 
 .input-range__slider {
-    border: none;
-    width: 8px;
-    height: 18px;
-    border-radius: unset;
+    border: none !important;
+    width: 8px !important;
+    height: 18px !important;
+    border-radius: unset !important;
 }
 
 .input-range__label {
-    top: 15px;
+    top: 15px !important;
 }
 
 .FilterCheckbox {
-    display: flex;
+    display: flex ;
     flex-direction: column;
 }
 
