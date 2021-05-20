@@ -274,9 +274,7 @@ form.form1 {
     height: auto;
     align-items: center;
 }
-.SocialMediaIconsFooter>span{
-    margin-top:55px;
-}
+
 .iconItems{
     display: flex;
     margin-top: 20px;
@@ -290,7 +288,7 @@ form.form1 {
 }
 .contactInfo{
     display:flex;
-    width: 70%;
+    width: 100%;
     height: 130px;
 }
 .contactInfo{

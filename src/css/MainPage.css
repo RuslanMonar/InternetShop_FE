@@ -1,0 +1,123 @@
+/* 
+.Slider{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+} */
+
+.TypeOfProduct {
+    outline: none;
+}
+.SliderTypeProductcontainer{
+    margin-bottom: 5%;
+}
+li.slick-active>div{
+    background-color: rgb(4, 179, 4) !important;
+}
+.PopularProducts{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    width: 100%;
+    justify-content: center;
+}
+.TypeOfProduct img {
+    width: 100%;
+    height: fit-content;
+    object-fit: scale-down;
+}
+.categoryTitle{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+.ButtonImage {
+    cursor: pointer;
+    width: 80px;
+    top: 180px;
+    left: 20%;
+    position: absolute;
+    height: 40px;
+    z-index: 1;
+    color: whitesmoke;
+    letter-spacing: 2px;
+    background-color: blueviolet;
+    border: 2px solid white;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.Slider {
+    outline: none;
+}
+
+.TextForButton {
+    top: 130px;
+    letter-spacing: 2px;
+    z-index: 1;
+    left: 19.5%;
+    position: absolute;
+    color: whitesmoke;
+}
+
+.SliderDots {
+
+    text-align: center;
+    list-style-type: none;
+}
+
+.imageLeftSwipe {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+
+}
+
+.imagerightSwipe {
+    width: 50px;
+    height: 50px;
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+.MainCategories {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.CategoryItem {
+    display: flex;
+    flex-direction: column;
+    width: 21%;
+    height: 340px;
+    background-color: rgb(255, 255, 255);
+    margin-left: 3%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.CategoryItem>a>div {
+    /* height: 60%;
+    padding: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 500px;
+    margin-bottom: 16px;
+}
+
+.CategoryItem>a>div>img {
+    /* width: 100%;
+    height: 100%;
+    object-fit: scale-down; */
+    max-width: 100%;
+    max-height: 100%;
+}

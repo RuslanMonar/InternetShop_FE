@@ -16,11 +16,27 @@ import Rodal from 'rodal';
 import CartContext from './../../contexts/CartContext';
 import Cart from './../../modules/Cart/Cart';
 import { Pagination } from 'react-laravel-paginex'
+import { useLocation } from 'react-router-dom';
 
 const Grid = () => {
+    const { state } = useLocation();
 
     React.useEffect(() => {
-        if(!ProductsList || ProductsList.length === 0)
+        if (state) {
+            console.log(state);
+            if(state.type == 'Phone'){
+                setPhone(true);
+            }
+            if(state.type == 'Laptop'){
+                setLaptop(true);
+            }
+            if(state.type == 'Tablet'){
+                setTablet(true);
+            }
+            FindByCateogry(state.type);
+            return;
+        }
+        if (!ProductsList || ProductsList.length === 0)
             GetProductsList();
     }, [])
 
@@ -40,13 +56,13 @@ const Grid = () => {
     //const [ActiveLoader, setActiveLoader] = React.useState(false)
     const [PorductNotFound, setPorductNotFound] = React.useState(false)
 
-    const { cartModal, setCartModal , ProductsList , setProductList , data ,setData , ActiveLoader, setActiveLoader} = React.useContext(CartContext)
-    const [isFilter , setIsFilter] = React.useState(false)
-    
+    const { cartModal, setCartModal, ProductsList, setProductList, data, setData, ActiveLoader, setActiveLoader } = React.useContext(CartContext)
+    const [isFilter, setIsFilter] = React.useState(false)
+
 
     const options = {
         nextButtonText: ">",
-        prevButtonText : "<"
+        prevButtonText: "<"
     }
 
     const ChangePriceInput = (value, verge) => {
@@ -174,6 +190,7 @@ const Grid = () => {
         let data = { name: categoryName }
         api().post('/api/category', data).then(result => {
             setProductsParams(result)
+            console.log(data)
             setAll(false);
             setIsFilter(false);
             setActiveLoader(false);
@@ -181,8 +198,8 @@ const Grid = () => {
         })
     }
     const FindByCateogryPagination = (categoryName, pagination) => {
-        
-       setActiveLoader(true);
+
+        setActiveLoader(true);
         let data = { name: categoryName }
         api().post('/api/category?page=' + pagination.page, data).then(result => {
             setProductsParams(result)
@@ -259,13 +276,13 @@ const Grid = () => {
     }
 
 
-    const filterByParamsPagination = (type , pagination) => {
+    const filterByParamsPagination = (type, pagination) => {
         setIsFilter(true);
         setActiveLoader(true);
         insertParam('lower_price', lowerPrice.min)
         insertParam('higher_price', higherPrice.max)
         pagination = pagination.page;
-        let data = { filterParams, type , pagination }
+        let data = { filterParams, type, pagination }
         api().post("/api/filter?page=" + pagination, data).then(result => {
             if (Object.keys(result.data.products.data).length > 0) {
                 // setProductsParams(result)
@@ -315,6 +332,7 @@ const Grid = () => {
                             maxValue={maxPrice}
                             minValue={minPrice}
                             value={filterPrice}
+
                             onChange={value => { setFilterPrice(value); setLowerPrice(value); setHigherPrice(value) }}
                         />
                     </div>
@@ -331,13 +349,13 @@ const Grid = () => {
             </div>
             <div className={'grid'}>
                 {data ? [
-                    (All ? (<Pagination   options={options} changePage={GetProductsListPage} data={data.data} />) : (null)),
-                    ((Phone && !isFilter )? (<Pagination options={options}  changePage={(data) =>FindByCateogryPagination('Phone', data)} data={data.data}  />) : (null)),
-                    ((Tablet && !isFilter) ? (<Pagination options={options} changePage={(data) =>FindByCateogryPagination('Tablet', data)} data={data.data} />) : (null)),
-                    ((Laptop && !isFilter) ? (<Pagination options={options} changePage={(data) =>FindByCateogryPagination('Laptop', data)} data={data.data} />) : (null)),
-                    ((Phone && isFilter) ? (<Pagination options={options} changePage={(data) =>filterByParamsPagination('Phone', data)} data={data.data} />) : (null)),
-                    ((Tablet && isFilter) ? (<Pagination options={options} changePage={(data) =>filterByParamsPagination('Tablet', data)} data={data.data} />) : (null)),
-                    ((Laptop && isFilter) ? (<Pagination options={options} changePage={(data) =>filterByParamsPagination('Laptop', data)} data={data.data} />) : (null))
+                    (All ? (<Pagination options={options} changePage={GetProductsListPage} data={data.data} />) : (null)),
+                    ((Phone && !isFilter) ? (<Pagination options={options} changePage={(data) => FindByCateogryPagination('Phone', data)} data={data.data} />) : (null)),
+                    ((Tablet && !isFilter) ? (<Pagination options={options} changePage={(data) => FindByCateogryPagination('Tablet', data)} data={data.data} />) : (null)),
+                    ((Laptop && !isFilter) ? (<Pagination options={options} changePage={(data) => FindByCateogryPagination('Laptop', data)} data={data.data} />) : (null)),
+                    ((Phone && isFilter) ? (<Pagination options={options} changePage={(data) => filterByParamsPagination('Phone', data)} data={data.data} />) : (null)),
+                    ((Tablet && isFilter) ? (<Pagination options={options} changePage={(data) => filterByParamsPagination('Tablet', data)} data={data.data} />) : (null)),
+                    ((Laptop && isFilter) ? (<Pagination options={options} changePage={(data) => filterByParamsPagination('Laptop', data)} data={data.data} />) : (null))
                 ] : [null]}
                 <div className={'productsContainer'}>
                     {ProductsList ? (ProductsList.map(item => <ProductItem key={item.id} {...item} />)) : (null)}

@@ -35,32 +35,6 @@ import { faPhone , faSearchLocation , faEnvelope , faLock} from "@fortawesome/fr
                         <span className={classes['listItemTitle' , 'privacy']}><a href="#">Політика конфіденційності</a></span>
                     </div>
                 </div>
-            </div>
-            <div className={classes.headerList}>
-                <div className={classes.listItem}>
-                    <span className={classes.listItemTitle}>BASE + SHOP</span>
-                    <span>Item 1</span>
-                    <span>Item 2</span>
-                    <span>Item 3</span>
-                </div>
-                <div className={classes.listItem}>
-                    <span className={classes.listItemTitle}>Rainshternles</span>
-                    <span>Item 1</span>
-                    <span>Item 2</span>
-                    <span>Item 3</span>
-                </div>
-                <div className={classes.listItem}>
-                    <span className={classes.listItemTitle}>Homaposder</span>
-                    <span>Item 1</span>
-                    <span>Item 2</span>
-                    <span>Item 3</span>
-                </div>
-                <div className={classes.listItem}>
-                    <span className={classes.listItemTitle}>SupeActronic</span>
-                    <span>Item 1</span>
-                    <span>Item 2</span>
-                    <span>Item 3</span>
-                </div>
                 <div className={classes.SocialMediaIconsFooter}>
                     <span>Ми у соціальних мережах:</span>
                     <div className={classes.iconItems}>
@@ -71,6 +45,7 @@ import { faPhone , faSearchLocation , faEnvelope , faLock} from "@fortawesome/fr
                     </div>
                 </div>
             </div>
+           
         </div>
     )
 }
